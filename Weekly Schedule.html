@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">
+<html lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" name="Cache-Control" content="no-cache">
+<meta http-equiv="Cache-Control" name="Cache-Control" content="no-cache">
+<link rel="stylesheet" href="Weekly%20Schedule_files/web_defaultapp.css" type="text/css">
+<link rel="stylesheet" href="Weekly%20Schedule_files/web_defaultprint.css" type="text/css" media="print">
+<link rel="stylesheet" type="text/css" href="Weekly%20Schedule_files/app-overrides.css">
+<link rel="stylesheet" type="text/css" href="Weekly%20Schedule_files/common-platform.css">
+<link rel="stylesheet" type="text/css" href="Weekly%20Schedule_files/common-controls.css">
+<link rel="stylesheet" type="text/css" href="Weekly%20Schedule_files/jquery.css">
+<link rel="stylesheet" type="text/css" href="Weekly%20Schedule_files/cascade.css">
+<!--[if IE 6]><link href="/css/ie6.css" rel="stylesheet" type="text/css"><![endif]-->
+<!--[if IE 7]><link href="/css/ie7.css" rel="stylesheet" type="text/css"><![endif]-->
+<!--[if IE 8]><link href="/css/ie8.css" rel="stylesheet" type="text/css"><![endif]-->
+<link rel="stylesheet" type="text/css" href="Weekly%20Schedule_files/cascade-print.css" media="print">
+<script type="text/javascript" src="Weekly%20Schedule_files/jquery-1.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/jquery_003.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/jquery_002.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/jquery-ui-personalized-1.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/jquery_006.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/jquery_004.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/jquery.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/json2xml.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/jquery_005.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/serviceProperties.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/common-controls-min.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/common-integrate-min.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/common-navigation-min.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/common-platform-min.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/cascade-utils-min.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/cascade-controls-min.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/udcxml-service-min.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/cascade-parser-min.js"></script>
+<script type="text/javascript" src="Weekly%20Schedule_files/cascade-ext-min.js"></script>
+<title>Weekly Schedule</title>
+<meta http-equiv="Content-Script-Type" name="Default_Script_Language" content="text/javascript">
+<script language="JavaScript" type="text/javascript">
+<!-- Hide JavaScript from older browsers 
+window.onunload = function() {submitcount=0;}
+var submitcount=0;
+function checkSubmit() {
+if (submitcount == 0)
+   {
+   submitcount++;
+   return true;
+   }
+else
+   {
+alert("Your changes have already been submitted.");
+   return false;
+   }
+}
+//  End script hiding -->
+</script>
+<script language="JavaScript" type="text/javascript">
+<!-- Hide JavaScript from older browsers 
+//  Function to open a window
+function windowOpen(window_url) {
+   helpWin = window.open(window_url,'','toolbar=yes,status=no,scrollbars=yes,menubar=yes,resizable=yes,directories=no,location=no,width=450,height=575');
+   if (document.images) { 
+       if (helpWin) helpWin.focus()
+   }
+}
+//  End script hiding -->
+</script>
+<script language="JavaScript" type="text/javascript">
+<!-- Hide JavaScript from older browsers 
+var level_depth = "4";
+var userDetails = "REDA ALI AL SULAIS";
+var userID = "202163910";
+var LastWebAccess = "";
+var wcMessage = "Welcome, REDA A. AL SULAIS, to the Banner Web!";
+var sessionToken = "UTEyWEgwMFdVQVAzNjIyODQ=";
+var locale_val = "AMERICAN_AMERICA";
+var locale_lang = "en_US";
+var help_width= "450";
+var help_height = "500";
+//  End script hiding -->
+</script>
+</head>
+<body style="display: block;"><div id="checkdiv" style="left:1%;line-height:1;font-family:monospace;width:0px;position:absolute;">&nbsp;</div><div id="header"><div id="globalNav"><div><ul><li><a class="signOutText pointer signOut">Sign Out</a></li><li><a class="helpText pointer">Help</a></li></ul></div></div><span class="institutionalBranding"></span><div id="areas"><div id="browseButton" class="browseButton" style="background-position: 0px -82px;"><div style="background-position: 0px 0px;"><div style="background-position: right -41px;"><a id="browseArrow" class="browseButtonDownArrow" href="javascript:void(0)">Browse</a></div></div></div></div><div id="browseMenuContainer"><div id="browseMenu"><div id="scrollableListContainer"></div></div><span id="browseButtonBottom" class="browseButton"></span><span class="bottomDropShadow"></span></div></div><div id="content" class="level4" style="display: block;"><div id="navigationcontrolSmall"><span class="navArrowLeftSmall navArrowLeftSmallDisabled" style="cursor: default;"></span><span class="navArrowRightSmall navArrowRightSmallDisabled" style="cursor: default;"></span><span class="menucontainer"><span id="menuTrackInst" class="menutrack" style="width: 73.5px;"><span class="menuitem"><button id="bmenu--P_StuMainMnu___UID3" type="button" value="null" class="htmlButton menuSmallBaseButton" url="/PROD9/twbkwbis.P_GenMenu?name=bmenu.P_StuMainMnu"><div class="menuSmall menuSmallHighlight"><div><div>Student</div></div></div></button></span></span></span></div><div id="pageheaderlinks"><ul></ul></div><div id="search"><div class="searchBase"></div><div id="searchField"><span class="findicon"></span><input class="searchInput ac_input" type="text" value="Find a page..." autocomplete="off"><span class="closeicon"></span></div></div><a name="top"></a><div id="bodyContainer"><div id="pageheader" class="level4"><div id="pagetitle">Weekly Schedule</div><div id="welcomemessage" style="display: none;"></div><div id="crumb" class="level4"><div class="backurl"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu" title="RETURN TO MENU"></a></div><div class="breadCrumb hasBackURL"><a href="javascript:void(0)" class="">Home</a><div class="breadcrumbSeperator">&gt;</div><a href="javascript:void(0)" class="">Student / Financial Aid</a><div class="breadcrumbSeperator">&gt;</div><a href="javascript:void(0)" class="">Registration</a><div class="breadcrumbSeperator">&gt;</div><a href="javascript:void(0)" class="selected" style="cursor: default;">Weekly Schedule</a></div></div><div class="staticheaders">
+202163910 REDA A. AL SULAIS<br>
+Nov 21, 2021 11:01 pm<br>
+</div></div><div id="pagebody" class="level4"><div id="contentHolder"><div id="footerLinks" style="display: none;"><ul></ul></div><div id="contentBelt"></div><div class="pagebodydiv" style="display: block;">
+<!--  ** END OF twbkwbis.P_OpenDoc **  -->
+<div class="infotextdiv"><table class="infotexttable" summary="This layout table contains information that may be helpful in understanding the content and functionality of this page.  It could be a brief set of instructions, a description of error messages, or other special information."><tbody><tr><td class="indefault"><img src="Weekly%20Schedule_files/web_info_cascade.png" alt="Information" class="headerImg" title="Information" name="web_info" width="14" vspace="0" hspace="0" height="12" border="0"></td><td class="indefault"><span class="infotext">
+ The following is your class schedule by day and time. Classes that do 
+not have scheduled meeting times are listed at the bottom of the page. 
+Click on hyperlinked courses for more detail.</span></td></tr></tbody></table><p></p></div>
+<form action="/PROD9/bwskfshd.p_proc_crse_schd" method="post">
+<table class="plaintable" summary="This layout table is used to present the goto date input field and submit button." width="100%">
+<tbody><tr>
+<td class="pldefault"><p class="rightaligntext" p="">
+<label for="goto_id"><span class="fieldlabeltext">Go to (DD/MM/YYYY):</span></label>
+<input type="text" name="goto_date_in" size="11" maxlength="10" id="goto_id">
+<input type="hidden" name="start_date_in" value="11/10/2021">
+<button id="id____UID4" type="submit" value="Submit" onclick="beforeSubmit(this)" '="" class="htmlButton" url=""><div class="defaultButtonSmall"><div><div>Submit</div></div></div></button><input type="submit" value="Submit" style="display: none;">
+</p></td>
+</tr>
+</tbody></table>
+</form>
+<table class="plaintable" summary="This layout table is used to present the goto previous and next week anchors along with the current week information." width="80%">
+<tbody><tr>
+<td colspan="1" class="pldefault"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchd?start_date_in=04/10/2021" onmouseover="window.status='Previous Week';  return true" onfocus="window.status='Previous Week';  return true" onmouseout="window.status='';  return true" onblur="window.status='';  return true">Previous Week</a></td>
+<td colspan="4" class="pldead">&nbsp;</td>
+<td colspan="3" class="pldefault"><span class="fieldlargetext">Week of Oct 11, 2021</span><span class="fieldmediumtext"> (8 of 18)</span></td>
+<td colspan="1" class="pldead">&nbsp;</td>
+<td colspan="1" class="pldefault"><p class="rightaligntext"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchd?start_date_in=18/10/2021" onmouseover="window.status='Next Week';  return true" onfocus="window.status='Next Week';  return true" onmouseout="window.status='';  return true" onblur="window.status='';  return true">Next Week</a></p></td>
+</tr>
+</tbody></table>
+<table class="datadisplaytable" summary="This layout table is used to present the weekly course schedule." width="80%">
+<tbody><tr>
+<th class="ddheader" scope="col">&nbsp;</th>
+<th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Sunday&nbsp;&nbsp;&nbsp;</th>
+<th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Monday&nbsp;&nbsp;&nbsp;</th>
+<th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Tuesday&nbsp;&nbsp;&nbsp;</th>
+<th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Wednesday&nbsp;&nbsp;&nbsp;</th>
+<th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Thursday&nbsp;&nbsp;&nbsp;</th>
+<th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;</th>
+<th class="ddheader" scope="col">&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;</th>
+</tr>
+<tr>
+<th rowspan="4" class="ddlabel" scope="row" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">8am</th>
+<td rowspan="7" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=10495">PYP 003-01<br>10495 Class<br>8:00 am-9:50 am<br>57 215</a></td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td rowspan="7" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=10770">PYP 002-05<br>10770 Class<br>8:00 am-9:50 am<br>57 204</a></td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="4" class="ddlabel" scope="row" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">9am</th>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="4" class="ddlabel" scope="row" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">10am</th>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>10:00 am-10:50 am<br>57 311</a></td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>10:00 am-10:50 am<br>57 311</a></td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>10:00 am-10:50 am<br>57 311</a></td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>10:00 am-10:50 am<br>57 311</a></td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>10:00 am-10:50 am<br>57 311</a></td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="4" class="ddlabel" scope="row" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">11am</th>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>11:00 am-11:50 am<br>57 311</a></td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>11:00 am-11:50 am<br>57 311</a></td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>11:00 am-11:50 am<br>57 311</a></td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>11:00 am-11:50 am<br>57 311</a></td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>11:00 am-11:50 am<br>57 311</a></td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="4" class="ddlabel" scope="row" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">12pm</th>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="4" class="ddlabel" scope="row" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">1pm</th>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=10270">MATH 001-23<br>10270 Class<br>1:00 pm-1:50 pm<br>57 303</a></td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=10270">MATH 001-23<br>10270 Class<br>1:00 pm-1:50 pm<br>57 303</a></td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=10270">MATH 001-23<br>10270 Class<br>1:00 pm-1:50 pm<br>57 303</a></td>
+<td class="dddefault">&nbsp;</td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=10270">MATH 001-23<br>10270 Class<br>1:00 pm-1:50 pm<br>57 303</a></td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="4" class="ddlabel" scope="row" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">2pm</th>
+<td class="dddefault">&nbsp;</td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=10409">PE 001-62<br>10409 Class<br>2:00 pm-2:50 pm<br>39 </a></td>
+<td class="dddefault">&nbsp;</td>
+<td rowspan="3" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=10409">PE 001-62<br>10409 Class<br>2:00 pm-2:50 pm<br>39 </a></td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="4" class="ddlabel" scope="row" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">3pm</th>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td rowspan="4" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>3:20 pm-4:10 pm<br>57 311</a></td>
+<td rowspan="4" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>3:20 pm-4:10 pm<br>57 311</a></td>
+<td rowspan="4" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>3:20 pm-4:10 pm<br>57 311</a></td>
+<td rowspan="4" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>3:20 pm-4:10 pm<br>57 311</a></td>
+<td rowspan="4" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>3:20 pm-4:10 pm<br>57 311</a></td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="4" class="ddlabel" scope="row" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">4pm</th>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td rowspan="4" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>4:20 pm-5:10 pm<br>57 311</a></td>
+<td rowspan="4" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>4:20 pm-5:10 pm<br>57 311</a></td>
+<td rowspan="4" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>4:20 pm-5:10 pm<br>57 311</a></td>
+<td rowspan="4" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>4:20 pm-5:10 pm<br>57 311</a></td>
+<td rowspan="4" class="ddlabel"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl?term_in=202110&amp;crn=11674">ENGL 04-FH-53<br>11674 Class<br>4:20 pm-5:10 pm<br>57 311</a></td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<th rowspan="4" class="ddlabel" scope="row" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(0, 0, 0);">5pm</th>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+<tr>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+<td class="dddefault">&nbsp;</td>
+</tr>
+</tbody></table>
+<br>
+
+<!--  ** START OF twbkwbis.P_CloseDoc **  -->
+<table class="plaintable" summary="This is table displays line separator at end of the page." width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="" colspan="2" width="100%"><img src="Weekly%20Schedule_files/web_transparent.gif" alt="Transparent Image" class="headerImg" title="Transparent Image" name="web_transparent" width="10" vspace="0" hspace="0" height="3" border="0"></td></tr></tbody></table>
+<a href="#top" onmouseover="window.status='Skip to top of page'; return true" onmouseout="window.status=''; return true" onfocus="window.status='Skip to top of page'; return true" onblur="window.status=''; return true" class="skiplinks">Skip to top of page</a>
+</div><div id="footerLinks"><ul><li><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskhreg.p_reg_hist" onmouseover="window.status='Registration History'; return true" onmouseout="window.status=''; return true" onfocus="window.status='Registration History'; return true" onblur="window.status=''; return true" title="Registration History">Registration History</a></li><li><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfcls.p_sel_crse_search" onmouseover="window.status='Look Up Classes'; return true" onmouseout="window.status=''; return true" onfocus="window.status='Look Up Classes'; return true" onblur="window.status=''; return true" title="Look Up Classes">Look Up Classes</a></li><li style="background-image: none;"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfshd.P_CrseSchdDetl" onmouseover="window.status='Detail Schedule'; return true" onmouseout="window.status=''; return true" onfocus="window.status='Detail Schedule'; return true" onblur="window.status=''; return true" title="Detail Schedule">Detail Schedule</a></li></ul></div></div></div><div id="pagefooter" class="footertext"><div class="sitemaplink"><a href="https://banner8-ssb.kfupm.edu.sa/PROD9/twbksite.P_DispSiteMap?menu_name_in=bmenu.P_MainMnu&amp;depth_in=2&amp;columns_in=3">SITE MAP</a></div><div class="reltext">
+Release: 8.7.1
+</div></div><div id="globalFooter" class="footertext"></div></div></div>
+
+
+
+
+<div class="footerlinksdiv" style="display: block;">
+</div>
+<div class="footerafterdiv" style="display: block;">
+
+</div>
+<div class="globalafterdiv" style="display: block;">
+
+</div>
+
+
+<div class="poweredbydiv" style="display: block;">
+</div>
+<div class="div1" style="display: block;"></div>
+<div class="div2" style="display: block;"></div>
+<div class="div3" style="display: block;"></div>
+<div class="div4" style="display: block;"></div>
+<div class="div5" style="display: block;"></div>
+<div class="div6" style="display: block;"></div>
+<div class="banner_copyright" style="display: block;"></div>
+
+
+<div id="helpWindow"><div id="helpWindowControls"><span id="helpWindowIcon"></span><span id="helpWindowTitle">Help</span><span id="helpWindowCloseButton"></span></div><div id="helpWindowTop"></div><div id="helpWindowMiddle"><iframe id="helpWindowContent" frameborder="no"></iframe></div><div id="helpWindowBottom"></div><span id="helpWindowTab"><span id="helpWindowTabText">Help</span></span></div><div id="outerFooter" style="left: 0px;"><div id="footer"><div id="footerApplicationBar"><ul id="footerIconContainer"></ul><span class="footerBrandingLogo"></span><div id="footerAppContainer" <="" div=""></div></div></div></div></body></html>
