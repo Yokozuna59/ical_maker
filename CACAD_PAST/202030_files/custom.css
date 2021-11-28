@@ -1,0 +1,510 @@
+﻿/*!
+ * Start Bootstrap - Modern Business HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+/* Global Styles */
+
+html,
+body {
+    height: 100%;
+	background:#fafafa;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+.text-primary {
+    color: #007d40;
+}
+.img-portfolio {
+    margin-bottom: 30px;
+}
+.img-hover:hover {
+    opacity: 0.8;
+}
+.table-heading{
+	background:#007d40;
+	color:#fff;
+}
+.navbar {
+    border: 1px solid transparent;
+    margin-bottom: 0px;
+    min-height: 50px;
+    position: relative;
+}
+
+     .hidden
+     {
+         display:none;
+     }
+
+/*#####################
+Additional Styles (required)
+#####################*/
+
+#myCarousel .carousel-caption {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: left;
+    padding: 10px 20px;
+    /* background: rgba(0,0,0,0.80); */
+    text-shadow: none;
+    max-width: 40%;
+    float: left;
+    position: relative;
+    color: #333;
+}
+
+
+/*####################
+    Gridview Radius 
+###################### */
+
+.grid th{
+  text-align:center !important;
+}
+
+.rounded-corners
+        {
+            border: 1px solid #dddddd;  -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; overflow: hidden;
+        }
+/**/
+
+/*####################
+    Note Background color 
+###################### */
+.note-bgcolor
+{
+    background-color:#DAD1C3;
+}
+
+
+.carousel-inner .item{
+	background:#f5f5f5 none repeat scroll 0 0;
+	border: 1px solid #ddd;
+    float: left;
+    width: 100%;
+}
+
+.carousel-inner .slider-img{
+	float:right;
+	width:60%;
+}
+
+.carousel-inner .slider-img img{
+	width:100% !important;
+	height:auto;
+}
+
+.carousel-control.left, .carousel-control.right {
+	background-image:none !important;
+}
+.carousel-indicators {
+	bottom:5px;
+	left:0;
+	width:auto;
+	padding:5px 25px 5px 25px;
+	margin-left:0;
+	background:rgba(0,0,0,0.7);
+}
+.carousel-indicators li {
+	border-radius:0;
+	width:8px;
+	height:8px;
+	background:#fff;
+}
+.carousel-indicators .active {
+	width:10px;
+	height:10px;
+	background:#007d40;
+	border-color:#007d40;
+}
+
+.carousel-control {
+	background:	#007d40;
+	color:#fff;
+	padding: 4px 0;
+	width:26px;
+	top:auto;	
+	left:auto;
+	bottom:12px;
+	opacity:0.85;
+}
+.carousel-control.right {
+	right:10px;
+}
+
+.carousel-control.left {
+	right: 46px;
+}
+
+
+
+/* List Groups */
+
+.list-group {
+    padding-right: 0px !important;
+}
+.list-group-item h4 {
+    font-size: 16px;
+    font-weight: normal;
+    color: #888;
+    padding: 0px;
+    margin: 0px;
+}
+.label-primary {
+    background-color: #007d40;
+}
+.badge {
+    background-color: #f0eada;
+    color: #444;
+    font-weight: normal;
+}
+
+.list-group-item {
+    background-color: #e6e6e6;
+    border: 1px solid #fafafa;
+}
+
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover {
+    background-color: #007d40;
+    border-color: #007d40;
+    color: #fff;
+    z-index: 2;
+}
+.team-thumbnail-body {
+    height: 210px;
+}
+
+.panel {
+    margin-bottom: 0px;
+}
+
+@media (min-width: 992px) {
+    #myCarousel {
+        /*padding-right: 33.3333%;*/
+    }
+    #myCarousel .carousel-controls {
+        /*display: none;*/
+    }
+}
+@media (max-width: 991px) {
+}
+/* Home Page Carousel 
+
+header.carousel {
+    height: 50%;
+}
+*/
+
+header.carousel .item,
+header.carousel .item.active,
+header.carousel .carousel-inner {
+    height: 100%;
+}
+header.carousel .fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+#kfupm {
+    background: #333;
+    padding: 8px 0px;
+}
+#kfupm a {
+    color: #999;
+}
+.navbar-inverse {
+    background-color: #007d40;
+    border-color: #007d40;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+    font-weight: bold;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #fff;
+	background:#007d40;
+}
+.navbar-inverse .navbar-toggle {
+    border-color: #007d40;
+}
+.navbar-toggle {
+    margin-top: 30px;
+}
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #555;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
+    background-color: #fff;
+    color: #333;
+}
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #666;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
+	background:#eee;
+    color: #333;
+}
+
+/* main well*/
+
+.main-well {
+    background: #DAD1C3;
+    border-bottom:1px thin #ccc;
+}
+
+.btn-primary {
+    background-color: #007d40;
+    border-color: #007d40;
+    color: #fff;
+}
+.btn-primary:hover {
+    background-color: #333;
+    border-color: #333;
+    color: #fff;
+}
+
+.panel-kfupm{
+	background:#ddd;
+	border:0px;
+	border-radius:0px;
+}
+
+.panel-kfupm a{
+	color:#000;
+}
+
+.panel-heading {
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 2px 15px;
+}
+.panel-body {
+    /* min-height: 50px; 210 modified 27-Jan-2016 */
+    padding: 15px;
+}
+/* 404 Page Styles */
+
+.error-404 {
+    font-size: 100px;
+}
+/* Pricing Page Styles */
+
+.price {
+    display: block;
+    font-size: 50px;
+    line-height: 50px;
+}
+.price sup {
+    top: -20px;
+    left: 2px;
+    font-size: 20px;
+}
+.period {
+    display: block;
+    font-style: italic;
+}
+/* Footer Styles */
+
+.footer-distributed {
+    background-color: #292c2f;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    clear: both;
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    font: normal 16px sans-serif;
+    padding: 45px 10px;
+    margin-top: 40px;
+}
+.footer-distributed .container {
+    width:100%;
+}
+.footer-distributed .footer-left p {
+    color: #8f9296;
+    font-size: 14px;
+    margin: 0;
+}
+/* Footer links */
+
+.footer-distributed p.footer-links {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0 0 10px;
+    padding: 0;
+}
+.footer-distributed p.footer-links a {
+    display: inline-block;
+    line-height: 1.8;
+    text-decoration: none;
+    color: inherit;
+}
+.footer-distributed .footer-right {
+    float: right;
+    margin-top: 6px;
+    max-width: 180px;
+}
+.footer-distributed .footer-right a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-color: #33383b;
+    border-radius: 2px;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 35px;
+    margin-left: 3px;
+}
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 600px) {
+    .footer-distributed .footer-left,
+    .footer-distributed .footer-right {
+        text-align: center;
+    }
+    .footer-distributed .footer-right {
+        float: none;
+        margin: 0 auto 20px;
+    }
+    .footer-distributed .footer-left p.footer-links {
+        line-height: 1.8;
+    }
+	.carousel-inner .carousel-caption {
+		max-width:100% !important;
+	}
+.carousel-inner .slider-img{
+	float:left;
+	width:100% !important;
+}
+
+.carousel-indicators {
+    background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
+    bottom: -40px;
+    padding: 5px 25px;
+    width: 100%;
+}
+
+.carousel-controls {
+    bottom: -42px;
+    width: 100%;
+	position:relative;
+	z-index:999;
+}
+
+.carousel-control.left {
+    left: 0px;
+}
+
+.carousel-control.right {
+    right: 0px;
+}
+
+.carousel-control {
+    padding: 1px 0;
+    top: auto;
+    width: 26px;
+}
+
+}
+/* Responsive Styles */
+
+@media(max-width:991px) {
+    .customer-img, .img-related {
+        margin-bottom: 30px;
+    }
+}
+@media(max-width:767px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+    header.carousel .carousel {
+        height: 70%;
+    }
+    
+}
+@media(max-width:500px) {
+    .navbar-inverse .navbar-brand {
+        display: block;
+        width: 255px;
+    }
+        .navbar-inverse .navbar-brand img {
+            max-width:100%;
+            height:auto !important;
+        }
+}
+.event-date{
+	padding:0px 20px 0px 0px;
+}
+
+.event-day{
+float: left; font-size:20px; font-weight:bold; margin:0px; padding:0px;
+}
+
+.event-month{
+float:left; margin:0px; padding:0px;
+}
+
+.event-desc{
+	line-height:16px;
+	margin-top:5px !important;
+}
+
+a.list-group-item:focus, a.list-group-item:hover{
+	background-color:#ccc;
+	color:#fff;
+	text-decoration:none;
+}
+
+.dropdown-menu {
+        background-clip: padding-box;
+    /* background-color: #005f30; */
+    background-color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    display: none;
+    float: left;
+    font-size: 14px;
+    left: 0;
+    list-style: outside none none;
+    margin: 2px 0 0;
+    min-width: 160px;
+    padding: 5px 0;
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    z-index: 1000;
+}
+
+.list-item-desc{
+    color: #337ab7;	
+	/*color:#007d40;*/
+}
+
+.stu-ann{
+    margin-top: 0px;
+}
+
+@media screen and (max-width:767px){
+	.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {color: #262626 !important;}
+	.dropdown-menu > li > a {color: #fff !important;}
+	.navbar-inverse .navbar-nav>li>a:focus{color:#0d7e40 !important; background-color:#fff !important;}
+	.navbar-brand{height:auto;}
+	.navbar-inverse .navbar-nav > li:nth-child(1){display:none;}
+	.navbar-toggle {
+	    margin-top: 22px !important;
+	}
+}

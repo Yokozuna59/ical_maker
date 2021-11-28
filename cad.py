@@ -2,11 +2,12 @@
 from os import close
 
 # Open and Read the file
-html_page = open("202110_CACAD.html", "r")
-read_page = html_page.read()
+"path/to/file/" + "example.txt"
+html_page = open("CACAD_PAST/" + "202010.html")
+readed_page = html_page.read()
 
 # Gitting the table
-table = read_page.replace('\t\t\t<th scope="col" style="color:White;background-color:#007D40;">DAY</th><th scope="col" style="color:White;background-color:#007D40;">WEEK</th><th scope="col" style="color:White;background-color:#007D40;">HIJRI DATE</th><th scope="col" style="color:White;background-color:#007D40;">GREGORIAN DATE</th><th scope="col" style="color:White;background-color:#007D40;">EVENTS</th>\n\t\t</tr><tr>', "$$$").replace("</table>", "$$$").split("$$$")
+table = readed_page.replace('\t\t\t<th scope="col" style="color:White;background-color:#007D40;">WEEK DAY</th><th scope="col" style="color:White;background-color:#007D40;">HIJRI DATE</th><th scope="col" style="color:White;background-color:#007D40;">GREGORIAN DATE</th><th scope="col" style="color:White;background-color:#007D40;">EVENTS</th>\n\t\t</tr><tr>', "$$$").replace('\t\t\t<th scope="col" style="color:White;background-color:#007D40;">DAY</th><th scope="col" style="color:White;background-color:#007D40;">WEEK</th><th scope="col" style="color:White;background-color:#007D40;">HIJRI DATE</th><th scope="col" style="color:White;background-color:#007D40;">GREGORIAN DATE</th><th scope="col" style="color:White;background-color:#007D40;">EVENTS</th>\n\t\t</tr><tr>', "$$$").replace("</table>", "$$$").split("$$$")
 
 # Counting elements
 length_table = len(table)
@@ -16,6 +17,7 @@ if (length_table == 4):
 elif (length_table == 6):
      range_table = 5
      bool = True
+
 
 for n in range(2, range_table):
      # Getting item
