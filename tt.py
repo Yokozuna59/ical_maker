@@ -1,8 +1,11 @@
 # Open and Read the file
-html_page = (open("202110_CACAD_PREP.html")).read()
+from os import close
+
+html_page = open("202110_CACAD.html", "r")
+read_page = html_page.read()
 
 # Gitting the table
-table = html_page.replace('\t\t\t<th scope="col" style="color:White;background-color:#007D40;">DAY</th><th scope="col" style="color:White;background-color:#007D40;">WEEK</th><th scope="col" style="color:White;background-color:#007D40;">HIJRI DATE</th><th scope="col" style="color:White;background-color:#007D40;">GREGORIAN DATE</th><th scope="col" style="color:White;background-color:#007D40;">EVENTS</th>\n\t\t</tr><tr>', "$$$").replace("</table>", "$$$").split("$$$")
+table = read_page.replace('\t\t\t<th scope="col" style="color:White;background-color:#007D40;">DAY</th><th scope="col" style="color:White;background-color:#007D40;">WEEK</th><th scope="col" style="color:White;background-color:#007D40;">HIJRI DATE</th><th scope="col" style="color:White;background-color:#007D40;">GREGORIAN DATE</th><th scope="col" style="color:White;background-color:#007D40;">EVENTS</th>\n\t\t</tr><tr>', "$$$").replace("</table>", "$$$").split("$$$")
 
 # Counting elements
 length_table = len(table)
@@ -42,3 +45,4 @@ for n in range(2, range_table):
                                    continue
                               else:
                                    print(splitted[j])
+html_page.close()
