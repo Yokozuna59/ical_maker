@@ -1,5 +1,4 @@
 ACADEMIC, 202110
-	29 August 2021, REGISTRATION CONFIRMATION thru KFUPM Portal
 	29 August 2021, Classes begin
 	1 Sepember 2021, Last day for registration confirmation (4:00 PM) Last day for adding courses
 	9 Sepember 2021, Last day for dropping course(s) without permanent record
@@ -19,7 +18,6 @@ ACADEMIC, 202110
 	16 January 2022, Beginning of Coop &amp; Registration for Term 212
 
 ACADEMIC, 202120
-	16 January 2022, REGISTRATION CONFIRMATION thru KFUPM Portal
 	16 January, Classes begin
 	19 January, Last day for registration confirmation (4:00 PM) Last day for adding courses
 	27 January, Last day for dropping course(s) without permanent record
@@ -33,12 +31,10 @@ ACADEMIC, 202120
 	8 May, Classes resumes after Ramadhan Break
 	12 May, Last day of classes for the term
 	15-26 May, Final examinations
-	29 May, Last day for faculty to submit grades to the Deanship (12:00 Noon); 
-Official Graduation Date
+	29 May, Last day for faculty to submit grades to the Deanship (12:00 Noon); Official Graduation Date
 	5 June 2022, Beginning of Co-op &amp; Summer Training and Registration for Summer Session 213
 
 ACADEMIC, 202130
-	5 June 2022, REGISTRATION CONFIRMATION thru KFUPM Portal
 	5 June, Classes begin
 	7 June, Last day for registration confirmation (12:00 Noon); Last day for adding courses  
 	12 June, Last day for dropping course(s) without permanent record
@@ -52,37 +48,38 @@ ACADEMIC, 202130
 	August 2022, Beginning of Academic Year 1444H  (2022-2023)
 
 PREP, 202110
-	29 August 2021, Registration Confirmation through Portal
-	29 August 2021, Classes begin
-	1 September, Last day for Registration Confirmation(4:00PM); Last day for adding courses
-	9 September, Last day for dropping course(s) without permanent record
-	23 September, National Day Holiday
-	17 October, Student Break
-	20 October, Last day of classes &amp;  Final examinations after 6pm
-	24 October, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
-	26 October 2021, Classes begin for English Module
-	28 Nov - 2 Dec , Student Break (Midterm)
-	22 December, Last day of classes for Prep. English Module
-	23 Dec - 3 Jan 2022 , Final examinations (for Prep English)
-	5 January 2022, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
+	FIRST HALF
+		29 August 2021, Classes begin
+		1 September, Last day for Registration Confirmation(4:00PM); Last day for adding courses
+		9 September, Last day for dropping course(s) without permanent record
+		23 September, National Day Holiday
+		17 October, Student Break
+		20 October, Last day of classes &amp;  Final examinations after 6pm
+		24 October, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
+	SECOND HALF
+		26 October 2021, Classes begin for English Module
+		28 Nov - 2 Dec , Student Break (Midterm)
+		22 December, Last day of classes for Prep. English Module
+		23 Dec - 3 Jan 2022 , Final examinations (for Prep English)
+		5 January 2022, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
 
 PREP, 202120
-	16 January 2022, Registration Confirmation through Portal
-	16 January 2022, Classes begin
-	19 January, Last day for Registration Confirmation(4:00PM); Last day for adding courses
-	27 January, Last day for dropping course(s) without permanent record
-	7 March, Last day of classes &amp; Final Examinations after 6pm
-	9 March, Last day for Prep. English faculty to submit grades to the Deanship (3:00 PM)
-	13 March 2022, Classes begin for English Module
-	21 April, Last day before Ramadhan break
-	24 April - 5 May 2022, Eid Al-Fitr Holidays
-	8 May , Classes resumes after Ramadhan Break
-	16 May, Last day of classes for prep English Module.
-	17-26 May, Final Examinations
-	29 May, Last day for Prep. English faculty to submit grades to the Deanship (12:00 Noon)
+	FIRST HALF
+		16 January 2022, Classes begin
+		19 January, Last day for Registration Confirmation(4:00PM); Last day for adding courses
+		27 January, Last day for dropping course(s) without permanent record
+		7 March, Last day of classes &amp; Final Examinations after 6pm
+		9 March, Last day for Prep. English faculty to submit grades to the Deanship (3:00 PM)
+	SECOND HALF
+		13 March 2022, Classes begin for English Module
+		21 April, Last day before Ramadhan break
+		24 April - 5 May 2022, Eid Al-Fitr Holidays
+		8 May , Classes resumes after Ramadhan Break
+		16 May, Last day of classes for prep English Module.
+		17-26 May, Final Examinations
+		29 May, Last day for Prep. English faculty to submit grades to the Deanship (12:00 Noon)
 
 ACADEMIC, 202010
-	30 August 2020, 202010
 	30 August 2020, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	2 September  , Last day for registration confirmation (4:00 PM); Last day for adding courses
 	10 September, Last day for dropping course(s) without permanent record
@@ -101,7 +98,6 @@ ACADEMIC, 202010
 	17 January 2021, Beginning of Coop &amp; Registration for Term 202
 
 ACADEMIC, 202020
-	17-Jan-2021, 202020
 	17-Jan-2021, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	20-Jan, Last day for registration confirmation (4:00 PM); Last day for adding courses
 	28-Jan, Last day for dropping course(s) without permanent record
@@ -120,7 +116,6 @@ ACADEMIC, 202020
 	6-Jun-2021, Beginning of Co-op &amp; Summer Training and Registration for Summer Session 203
 
 ACADEMIC, 202030
-	6 June 2021, 202030
 	6 June 2021, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	8 June, Last day for registration confirmation (12:00 Noon); Last day for adding courses
 	13 June, Last day for dropping course(s) without permanent record
@@ -136,33 +131,36 @@ ACADEMIC, 202030
 	29 August 2021, Beginning of Academic Year 1443H  (2021-2022)
 
 PREP, 202010
-	30 August 2020, Registration Confirmation through Portal for Preparatory students; Classes begin
-	2 September, Last day for Registration Confirmation(4:00PM); Last day for adding courses
-	10 September, Last day for dropping course(s) without permanent record
-	23-24 September, National Day Holidays
-	21 October,  Last day of classes &amp;  Final examinations after 6pm
-	25 October, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM )
-	27 October 2020, Classes begin for English Module
-	16 December, Last day of classes for Prep. English Module
-	17-28 December, Final examinations (for Prep English)
-	31 December, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
+	FIRST HALF
+		30 August 2020, Registration Confirmation through Portal for Preparatory students; Classes begin
+		2 September, Last day for Registration Confirmation(4:00PM); Last day for adding courses
+		10 September, Last day for dropping course(s) without permanent record
+		23-24 September, National Day Holidays
+		21 October,  Last day of classes &amp;  Final examinations after 6pm
+		25 October, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM )
+	SECOND HALF
+		27 October 2020, Classes begin for English Module
+		16 December, Last day of classes for Prep. English Module
+		17-28 December, Final examinations (for Prep English)
+		31 December, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
 
 PREP, 202020
-	17 January 2021, Registration Confirmation through Portal for Preparatory students; Classes begin
-	20 January, Last day for Registration Confirmation(4:00PM); Last day for adding courses
-	28 January, Last day for dropping course(s) without permanent record
-	8 March, Last day of classes &amp; Final Examinations after 6pm
-	10 March, Last day for Prep. English faculty to submit grades to the Deanship (3:00 PM)
-	14 March 2021, Classes begin for English Module
-	10 April, Normal Tuesday Classes
-	17 April, Normal Thursday Classes for prep English Module.
-	28 April, Last day of classes for prep English Module
-	30 April - 06 May, Final Examinations
-	7-17 May, Eid Al-Fitr Holidays -25  Ramadhan (7 May) - 5 Shawwal (17 May )
-	20 May, Last day for Prep. English faculty to submit grades to the Deanship (12:00 Noon)
+	FIRST HALF
+		17 January 2021, Registration Confirmation through Portal for Preparatory students; Classes begin
+		20 January, Last day for Registration Confirmation(4:00PM); Last day for adding courses
+		28 January, Last day for dropping course(s) without permanent record
+		8 March, Last day of classes &amp; Final Examinations after 6pm
+		10 March, Last day for Prep. English faculty to submit grades to the Deanship (3:00 PM)
+	SECOND HALF
+		14 March 2021, Classes begin for English Module
+		10 April, Normal Tuesday Classes
+		17 April, Normal Thursday Classes for prep English Module.
+		28 April, Last day of classes for prep English Module
+		30 April - 06 May, Final Examinations
+		7-17 May, Eid Al-Fitr Holidays -25  Ramadhan (7 May) - 5 Shawwal (17 May )
+		20 May, Last day for Prep. English faculty to submit grades to the Deanship (12:00 Noon)
 
 ACADEMIC, 201910
-	1 September 2019, 201910
 	1 September 2019, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	4 September  , Last day for registration confirmation (4:00 PM); Last day for adding courses
 	12 September, Last day for dropping course(s) without permanent record
@@ -177,12 +175,10 @@ ACADEMIC, 201910
 	16 December, Last day of classes for the term 
 	17 December, Exams preparation break
 	18 - 30 December, Final examinations
-	1 January 2020, Last day for faculty to submit grades to the Deanship (2:00 PM); 
-Official Graduation Date
+	1 January 2020, Last day for faculty to submit grades to the Deanship (2:00 PM); Official Graduation Date
 	19 January  2020,  Beginning of Coop &amp; Registration for Term 192
 
 ACADEMIC, 201920
-	19 January  2020, 201920
 	19 January  2020, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	22 January, Last day for registration confirmation (4:00 PM); Last day for adding courses
 	30 January, Last day for dropping course(s) without permanent record
@@ -195,12 +191,10 @@ ACADEMIC, 201920
 	23 April, Last day for major exams; Last day for withdrawal from all courses with grade of "WP/WF" thru the University Registrar Office*
 	30 April, Last day of classes
 	2 - 13 May, Final examinations
-	14 May, Last day for faculty to submit grades to the Deanship (2:00 PM); 
-Official Graduation Date
+	14 May, Last day for faculty to submit grades to the Deanship (2:00 PM); Official Graduation Date
 	31 May  2020,  Beginning of Coop &amp; Summer Training and Registration for Summer Session 193.
 
 ACADEMIC, 201930
-	31 May 2020, 201930
 	31 May 2020, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	2 June, Last day for registration confirmation (4:00 PM); Last day for adding courses
 	7 June, Last day for dropping course(s) without permanent record
@@ -214,35 +208,38 @@ ACADEMIC, 201930
 	30 August  2020,  Beginning of Academic Year 1442H (2020 - 2021)
 
 PREP, 201910
-	1 September 2019, Registration Confirmation through Portal for Preparatory students; Classes begin
-	4 September, Last day for Registration Confirmation(4:00PM); Last day for adding courses
-	12 September, Last day for dropping course(s) without permanent record
-	22-23 September, National Day Holidays
-	3 October, Last day for withdrawal from course(s) with grade of 'W' *
-	17 October, Last day for withdrawal with grade of 'WP/WF' in English Module and 'W' in all other courses* 
-	23 October, Last day of classes &amp;  Final examinations after 6pm
-	26 October, Last day for Prep. English faculty to submit grades to the Deanship (3:00 PM )
-	28 October 2019, Classes begin for English Module
-	31 October, Last day for Dropping Prep. English Module without permanent record and grade 'W' in all other courses
-	28 November, Last day for withdrawal with grade of 'W' in English Module and WP/WF in all other courses*
-	12 December, Last day for withdrawal with WP/WF grade in English module, and regular grade in other courses to be assigned by the Instructor
-	17 December, Last day of classes for Prep. English Module
-	18-30 December, Final examinations
-	1 January 2020, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
+	FIRST HALF
+		1 September 2019, Registration Confirmation through Portal for Preparatory students; Classes begin
+		4 September, Last day for Registration Confirmation(4:00PM); Last day for adding courses
+		12 September, Last day for dropping course(s) without permanent record
+		22-23 September, National Day Holidays
+		3 October, Last day for withdrawal from course(s) with grade of 'W' *
+		17 October, Last day for withdrawal with grade of 'WP/WF' in English Module and 'W' in all other courses* 
+		23 October, Last day of classes &amp;  Final examinations after 6pm
+		26 October, Last day for Prep. English faculty to submit grades to the Deanship (3:00 PM )
+	SECOND HALF
+		28 October 2019, Classes begin for English Module
+		31 October, Last day for Dropping Prep. English Module without permanent record and grade 'W' in all other courses
+		28 November, Last day for withdrawal with grade of 'W' in English Module and WP/WF in all other courses*
+		12 December, Last day for withdrawal with WP/WF grade in English module, and regular grade in other courses to be assigned by the Instructor
+		17 December, Last day of classes for Prep. English Module
+		18-30 December, Final examinations
+		1 January 2020, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
 
 PREP, 201920
-	19 January 2020, Registration Confirmation through Portal for Preparatory students; Classes begin
-	22 January, Last day for Registration Confirmation(4:00PM); Last day for adding courses
-	30 January, Last day for dropping course(s) without permanent record
-	20 Feburary, Last day for withdrawal from course(s) with grade of 'W' *
-	5 March, Last day for withdrawal with grade 'WP/WF' in English Module and 'W' in all other courses*  
-	9 March, Last day of classes &amp; Final Examinations after 6pm
-	11 March, Last day for Prep. English faculty to submit grades to the Deanship (3:00 PM)
-	15 March 2020, Classes begin for English Module
-	19 March, Last day for Dropping Prep. English module without permanent record and grade 'W' in all other courses
-	16 April, Last day for withdrawal with grade of 'W' in English Module and WP/WF in other courses*
-	30 April, Last day for withdrawal with WP/WF grade in English module, and regular grade in other courses to be assigned by the Instructor
-	4 May, Last day of classes for Prep. English Module
-	5-13 May, Final Examinations
-	14 May, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
-
+	FIRST HALF
+		19 January 2020, Registration Confirmation through Portal for Preparatory students; Classes begin
+		22 January, Last day for Registration Confirmation(4:00PM); Last day for adding courses
+		30 January, Last day for dropping course(s) without permanent record
+		20 Feburary, Last day for withdrawal from course(s) with grade of 'W' *
+		5 March, Last day for withdrawal with grade 'WP/WF' in English Module and 'W' in all other courses*  
+		9 March, Last day of classes &amp; Final Examinations after 6pm
+		11 March, Last day for Prep. English faculty to submit grades to the Deanship (3:00 PM)
+	SECOND HALF
+		15 March 2020, Classes begin for English Module
+		19 March, Last day for Dropping Prep. English module without permanent record and grade 'W' in all other courses
+		16 April, Last day for withdrawal with grade of 'W' in English Module and WP/WF in other courses*
+		30 April, Last day for withdrawal with WP/WF grade in English module, and regular grade in other courses to be assigned by the Instructor
+		4 May, Last day of classes for Prep. English Module
+		5-13 May, Final Examinations
+		14 May, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)

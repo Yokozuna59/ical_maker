@@ -41,10 +41,7 @@ for f in range_length_first_file:
 
                               # Counting elements
                               length_table = len(table)
-                              if (length_table == 4):
-                                   range_table = 3
-                              elif (length_table == 6):
-                                   range_table = 5
+                              range_table = length_table - 1
 
                               if (gap_line == False):
                                    gap_line = True
@@ -52,6 +49,7 @@ for f in range_length_first_file:
                                    print("\n", end= "")
                               print(new_second_file + ", " + new_year + new_term)
                               half = 0
+                              begin = False
 
                               for n in range(2, range_table):
                                    # Getting item
@@ -67,15 +65,41 @@ for f in range_length_first_file:
                                         length_splitted = len(splitted)
                                         range_splitted = range(length_splitted)
 
-                                        if new_second_file == "PREP" and half == 0:
+                                        if new_second_file == "PREP":
+                                             if half == 0:
                                                   print("\t" + halfs[half])
-                                                  half +=1
-                                        if (length_splitted == 11):
-                                             print("\t\t" + splitted[5], end= "")
-                                             print(", " + splitted[8])
-                                        if half == 1 and length_splitted_lines == 1:
+                                                  half = 1
+                                             elif half == 1 and length_splitted_lines == 1:
                                                   print("\t" + halfs[half])
                                                   half = 2
+                                             if (length_splitted != 12):
+                                                  if (length_splitted == 13 and i == 0):
+                                                       pass
+                                                  else:
+                                                       print("\t", end= "")
+                                        if (length_splitted == 11):
+                                             if begin == False:
+                                                  if (splitted[8].find("Classes begin") != -1):
+                                                       print("\t" + splitted[5], end= "")
+                                                       print(", " + splitted[8])
+                                                       begin = True
+                                                  else:
+                                                       if begin == True:
+                                                            print("\t" + splitted[5], end= "")
+                                                            print(", " + splitted[8])
+                                             else:
+                                                  print("\t" + splitted[5], end= "")
+                                                  print(", " + splitted[8])
                                         elif (length_splitted == 13):
-                                             print("\t\t" + splitted[7], end= "")
-                                             print(", " + splitted[10])
+                                             if begin == False:
+                                                  if (splitted[10].find("Classes begin") != -1):
+                                                       print("\t" + splitted[7], end= "")
+                                                       print(", " + splitted[10])
+                                                       begin = True
+                                                  else:
+                                                       if begin == True:
+                                                            print("\t" + splitted[7], end= "")
+                                                            print(", " + splitted[10])
+                                             else:
+                                                  print("\t" + splitted[7], end= "")
+                                                  print(", " + splitted[10])
