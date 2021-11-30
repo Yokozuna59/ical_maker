@@ -1,4 +1,4 @@
-CACAD, 202110
+ACADEMIC, 202110
 	29 August 2021, REGISTRATION CONFIRMATION thru KFUPM Portal
 	29 August 2021, Classes begin
 	1 Sepember 2021, Last day for registration confirmation (4:00 PM) Last day for adding courses
@@ -18,7 +18,7 @@ CACAD, 202110
 	5 January 2022, Last day for faculty to submit grades to the Deanship (12:00 Noon); Official Graduation Date
 	16 January 2022, Beginning of Coop &amp; Registration for Term 212
 
-CACAD, 202120
+ACADEMIC, 202120
 	16 January 2022, REGISTRATION CONFIRMATION thru KFUPM Portal
 	16 January, Classes begin
 	19 January, Last day for registration confirmation (4:00 PM) Last day for adding courses
@@ -33,10 +33,11 @@ CACAD, 202120
 	8 May, Classes resumes after Ramadhan Break
 	12 May, Last day of classes for the term
 	15-26 May, Final examinations
-	29 May, Last day for faculty to submit grades to the Deanship (12:00 Noon); Official Graduation Date
+	29 May, Last day for faculty to submit grades to the Deanship (12:00 Noon); 
+Official Graduation Date
 	5 June 2022, Beginning of Co-op &amp; Summer Training and Registration for Summer Session 213
 
-CACAD, 202130
+ACADEMIC, 202130
 	5 June 2022, REGISTRATION CONFIRMATION thru KFUPM Portal
 	5 June, Classes begin
 	7 June, Last day for registration confirmation (12:00 Noon); Last day for adding courses  
@@ -50,7 +51,7 @@ CACAD, 202130
 	14 August, Last day for faculty to submit grades to the Deanship (12:00 Noon); Official Graduation Date
 	August 2022, Beginning of Academic Year 1444H  (2022-2023)
 
-CACAD_PREP, 202110
+PREP, 202110
 	29 August 2021, Registration Confirmation through Portal
 	29 August 2021, Classes begin
 	1 September, Last day for Registration Confirmation(4:00PM); Last day for adding courses
@@ -65,7 +66,7 @@ CACAD_PREP, 202110
 	23 Dec - 3 Jan 2022 , Final examinations (for Prep English)
 	5 January 2022, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
 
-CACAD_PREP, 202120
+PREP, 202120
 	16 January 2022, Registration Confirmation through Portal
 	16 January 2022, Classes begin
 	19 January, Last day for Registration Confirmation(4:00PM); Last day for adding courses
@@ -80,7 +81,7 @@ CACAD_PREP, 202120
 	17-26 May, Final Examinations
 	29 May, Last day for Prep. English faculty to submit grades to the Deanship (12:00 Noon)
 
-CACAD, 202010
+ACADEMIC, 202010
 	30 August 2020, 202010
 	30 August 2020, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	2 September  , Last day for registration confirmation (4:00 PM); Last day for adding courses
@@ -99,7 +100,7 @@ CACAD, 202010
 	31 December,  Last day for faculty to submit grades to the Deanship (12:00 Noon); Official Graduation Date
 	17 January 2021, Beginning of Coop &amp; Registration for Term 202
 
-CACAD, 202020
+ACADEMIC, 202020
 	17-Jan-2021, 202020
 	17-Jan-2021, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	20-Jan, Last day for registration confirmation (4:00 PM); Last day for adding courses
@@ -118,7 +119,7 @@ CACAD, 202020
 	20-May, Last day for faculty to submit grades to the Deanship (12:00 Noon); Official Graduation Date
 	6-Jun-2021, Beginning of Co-op &amp; Summer Training and Registration for Summer Session 203
 
-CACAD, 202030
+ACADEMIC, 202030
 	6 June 2021, 202030
 	6 June 2021, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	8 June, Last day for registration confirmation (12:00 Noon); Last day for adding courses
@@ -134,7 +135,33 @@ CACAD, 202030
 	15 August, Last day for faculty to submit grades to the Deanship (12:00 Noon);Official Graduation Date
 	29 August 2021, Beginning of Academic Year 1443H  (2021-2022)
 
-CACAD, 201910
+PREP, 202010
+	30 August 2020, Registration Confirmation through Portal for Preparatory students; Classes begin
+	2 September, Last day for Registration Confirmation(4:00PM); Last day for adding courses
+	10 September, Last day for dropping course(s) without permanent record
+	23-24 September, National Day Holidays
+	21 October,  Last day of classes &amp;  Final examinations after 6pm
+	25 October, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM )
+	27 October 2020, Classes begin for English Module
+	16 December, Last day of classes for Prep. English Module
+	17-28 December, Final examinations (for Prep English)
+	31 December, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
+
+PREP, 202020
+	17 January 2021, Registration Confirmation through Portal for Preparatory students; Classes begin
+	20 January, Last day for Registration Confirmation(4:00PM); Last day for adding courses
+	28 January, Last day for dropping course(s) without permanent record
+	8 March, Last day of classes &amp; Final Examinations after 6pm
+	10 March, Last day for Prep. English faculty to submit grades to the Deanship (3:00 PM)
+	14 March 2021, Classes begin for English Module
+	10 April, Normal Tuesday Classes
+	17 April, Normal Thursday Classes for prep English Module.
+	28 April, Last day of classes for prep English Module
+	30 April - 06 May, Final Examinations
+	7-17 May, Eid Al-Fitr Holidays -25  Ramadhan (7 May) - 5 Shawwal (17 May )
+	20 May, Last day for Prep. English faculty to submit grades to the Deanship (12:00 Noon)
+
+ACADEMIC, 201910
 	1 September 2019, 201910
 	1 September 2019, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	4 September  , Last day for registration confirmation (4:00 PM); Last day for adding courses
@@ -154,7 +181,7 @@ CACAD, 201910
 Official Graduation Date
 	19 January  2020,  Beginning of Coop &amp; Registration for Term 192
 
-CACAD, 201920
+ACADEMIC, 201920
 	19 January  2020, 201920
 	19 January  2020, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	22 January, Last day for registration confirmation (4:00 PM); Last day for adding courses
@@ -172,7 +199,7 @@ CACAD, 201920
 Official Graduation Date
 	31 May  2020,  Beginning of Coop &amp; Summer Training and Registration for Summer Session 193.
 
-CACAD, 201930
+ACADEMIC, 201930
 	31 May 2020, 201930
 	31 May 2020, REGISTRATION CONFIRMATION thru KFUPM Portal; Classes begin
 	2 June, Last day for registration confirmation (4:00 PM); Last day for adding courses
@@ -183,37 +210,10 @@ CACAD, 201930
 	16 July, Last day for major exams; Last day for withdrawal from all courses with grade of "WP/WF" thru the University Registrar Office
 	19 July, Last day of classes
 	20 - 22  July, Final examinations
-	23 July, Last day for faculty to submit grades to the Deanship (2:00 PM); 
-Official Graduation Date
+	23 July, Last day for faculty to submit grades to the Deanship (2:00 PM); Official Graduation Date
 	30 August  2020,  Beginning of Academic Year 1442H (2020 - 2021)
 
-CACAD_PREP, 202010
-	30 August 2020, Registration Confirmation through Portal for Preparatory students; Classes begin
-	2 September, Last day for Registration Confirmation(4:00PM); Last day for adding courses
-	10 September, Last day for dropping course(s) without permanent record
-	23-24 September, National Day Holidays
-	21 October,  Last day of classes &amp;  Final examinations after 6pm
-	25 October, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM )
-	27 October 2020, Classes begin for English Module
-	16 December, Last day of classes for Prep. English Module
-	17-28 December, Final examinations (for Prep English)
-	31 December, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
-
-CACAD_PREP, 202020
-	17 January 2021, Registration Confirmation through Portal for Preparatory students; Classes begin
-	20 January, Last day for Registration Confirmation(4:00PM); Last day for adding courses
-	28 January, Last day for dropping course(s) without permanent record
-	8 March, Last day of classes &amp; Final Examinations after 6pm
-	10 March, Last day for Prep. English faculty to submit grades to the Deanship (3:00 PM)
-	14 March 2021, Classes begin for English Module
-	10 April, Normal Tuesday Classes
-	17 April, Normal Thursday Classes for prep English Module.
-	28 April, Last day of classes for prep English Module
-	30 April - 06 May, Final Examinations
-	7-17 May, Eid Al-Fitr Holidays -25  Ramadhan (7 May) - 5 Shawwal (17 May )
-	20 May, Last day for Prep. English faculty to submit grades to the Deanship (12:00 Noon)
-
-CACAD_PREP, 201910
+PREP, 201910
 	1 September 2019, Registration Confirmation through Portal for Preparatory students; Classes begin
 	4 September, Last day for Registration Confirmation(4:00PM); Last day for adding courses
 	12 September, Last day for dropping course(s) without permanent record
@@ -230,7 +230,7 @@ CACAD_PREP, 201910
 	18-30 December, Final examinations
 	1 January 2020, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
 
-CACAD_PREP, 201920
+PREP, 201920
 	19 January 2020, Registration Confirmation through Portal for Preparatory students; Classes begin
 	22 January, Last day for Registration Confirmation(4:00PM); Last day for adding courses
 	30 January, Last day for dropping course(s) without permanent record
@@ -245,3 +245,4 @@ CACAD_PREP, 201920
 	4 May, Last day of classes for Prep. English Module
 	5-13 May, Final Examinations
 	14 May, Last day for Prep. English faculty to submit grades to the Deanship (2:00 PM)
+
