@@ -1,44 +1,30 @@
+# Importing Mudules
 import os
-for o in os.listdir():
-     entries = os.listdir()
-     print(entries)
 
-# Creating lists for file path
-first_file = ["CURRENT", "PAST"]
-years = ["2021", "2020", "2019"]
-second_file = ["ACADEMIC", "PREP"]
-terms = ["10","20","30"]
-
-# Creating Dictionary for months
-# months = {"Jan":"/1", "Feb":"/2", "Mar":"/3", "Apr":"/4", "May":"/5", "Jun":"/6", "Jul":"/7", "Aug":"/8", "Sep":"/9", "Oct":"/10", "Nov":"/11", "Dec":"/12", }
-
-# Gitting the range of the lists
-range_length_first_file = range(len(first_file))
-range_length_year = range(len(years))
-range_length_second_file = range(len(second_file))
-range_length_term = range(len(terms))
-
+# Gitting files in directory
+first_directory = os.listdir()
 # The bool statement for the gaps
 gap_line = False
 
-for f in range_length_first_file:
-     new_first_file = first_file[f]
-     for y in range_length_year:
-          new_year = years[y]
-          for s in range_length_second_file:
-               new_second_file = second_file[s]
-               if (new_first_file == "CURRENT" and new_year != "2021"):
-                    continue
-               elif (new_first_file == "PAST" and new_year == "2021"):
-                    continue
+for f in range(len(first_directory)):
+     if (first_directory[f].find(".") != -1):
+          pass
+     else:
+          second_directory = os.listdir(first_directory[f])
+          for s in range(len(second_directory)):
+               if (second_directory[s].find(".") != -1):
+                    pass
                else:
-                    for t in range_length_term:
-                         new_term = terms[t]
-                         if (new_second_file == "PREP" and new_term == "30"):
-                              continue
-                         else:
-                              # Openning and reading the file
-                              open_read_file = (open(new_first_file + "/" + new_second_file + "/" + new_year + new_term + ".html")).read()
+                    third_directory = os.listdir(first_directory[f] + "/" + second_directory[s])
+                    for t in range(len(third_directory)):
+                         if (third_directory[t].find(".") != -1):
+                              new_first_directory = first_directory[f]
+                              new_second_directory = second_directory[s]
+                              new_third_directory = third_directory[t]
+
+                              print(new_first_directory + "/" + new_second_directory + "/" + new_third_directory)
+
+                              open_read_file = (open(new_first_directory + "/" + new_second_directory + "/" + new_third_directory)).read()
 
                               # Bringing the whole table
                               table = open_read_file.replace('\t\t\t<th scope="col" style="color:White;background-color:#007D40;">WEEK DAY</th><th scope="col" style="color:White;background-color:#007D40;">HIJRI DATE</th><th scope="col" style="color:White;background-color:#007D40;">GREGORIAN DATE</th><th scope="col" style="color:White;background-color:#007D40;">EVENTS</th>\n\t\t</tr><tr>', "$$$").replace('\t\t\t<th scope="col" style="color:White;background-color:#007D40;">DAY</th><th scope="col" style="color:White;background-color:#007D40;">WEEK</th><th scope="col" style="color:White;background-color:#007D40;">HIJRI DATE</th><th scope="col" style="color:White;background-color:#007D40;">GREGORIAN DATE</th><th scope="col" style="color:White;background-color:#007D40;">EVENTS</th>\n\t\t</tr><tr>', "$$$").replace("</table>", "$$$").split("$$$")
@@ -54,7 +40,7 @@ for f in range_length_first_file:
                                    print("\n", end= "")
 
                               # Printing the second path with year
-                              print(new_second_file + ", " + new_year + new_term)
+                              print(new_second_directory + ", " + new_third_directory.replace(".html", ""))
                               half = False
 
                               for i in range_table:
@@ -77,7 +63,7 @@ for f in range_length_first_file:
                                         splitted_items = splitted_lines[j].replace("amp;", "").replace("<a>", "$$$").replace("</td>", "$$$").replace('">', "$$$").replace("</a>", "$$$").replace("\n", "").split("$$$")
                                         length_splitted = len(splitted_items)
 
-                                        if new_second_file == "PREP":
+                                        if new_second_directory == "PREP":
                                              if half == False:
                                                   print("\tFIRST HALF")
                                                   half += 1
