@@ -40,15 +40,18 @@ for f in range(len(first_directory)):
                               # Counting elements and gitting the needed area
                               range_table = range(2, len(table) - 1)
 
+                              if new_second_directory == "PREP":
+                                   continue
                               # Checking the gap bool statement
-                              if (gap_line == False):
-                                   gap_line = True
                               else:
-                                   print("\n", end= "")
+                                   if (gap_line == False):
+                                        gap_line = True
+                                   else:
+                                        print("\n", end= "")
 
                               # Printing the second path with year
-                              print(new_second_directory + ", " + new_third_directory.replace(".html", ""))
-                              half = False
+                                   print(new_second_directory + ", " + new_third_directory.replace(".html", ""))
+                                   half = False
 
                               for i in range_table:
                                    # Getting the table
@@ -68,6 +71,7 @@ for f in range(len(first_directory)):
                                         length_splitted = len(splitted_items)
 
                                         if new_second_directory == "PREP":
+                                             continue
                                              if half == False:
                                                   print("\tFIRST HALF")
                                                   half += 1
