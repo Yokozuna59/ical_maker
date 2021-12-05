@@ -20,7 +20,7 @@ git clone https://github.com/Yokozuna59/ical_maker.git
 ### Chrome
 
 - Downloading [Google Chrome](https://www.google.com/chrome/).
-- Check your Chrome version
+- Check your Chrome version:
 
 ```
 google-chrome --version
