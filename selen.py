@@ -1,8 +1,8 @@
 import time
-from selenium import webdriver #
+from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
-from bs4 import BeautifulSoup #
+from bs4 import BeautifulSoup
 
 driver = webdriver.Chrome()
 driver.maximize_window()
