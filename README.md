@@ -7,11 +7,11 @@ A simple python project gets data needed from [KFUPM Registrar](https://registra
 - Should download [Google Chrome](https://www.google.com/chrome/).
 - Should download [Selenium WebDriver](https://chromedriver.chromium.org/downloads) **with the right version**.
 
-## Setup
+## Setup (Linux)
 
 ### Github
 
-1. Clone repository
+- Clone repository
 
 ```
 git clone https://github.com/Yokozuna59/ical_maker.git
@@ -19,8 +19,8 @@ git clone https://github.com/Yokozuna59/ical_maker.git
 
 ### Chrome
 
-1. Downloading [Google Chrome](https://www.google.com/chrome/).
-2. Check your Chrome version
+- Downloading [Google Chrome](https://www.google.com/chrome/).
+- Check your Chrome version
 
 ```
 google-chrome --version
@@ -28,28 +28,38 @@ google-chrome --version
 
 ### Selenium
 
-1. Installing selenium module
+- Installing modules
 
 ```
 pip3 install selenium
 ```
 
-2. Download the [Selenium WebDriver](https://chromedriver.chromium.org/downloads) as same as your Chrome version then unzip it.
-
-you need `root` to do next step:
-
 ```
-mv /home/potato/Downloads/<unzipped file> /usr/local/share/chromedriver
+pip3 install beautifulsoup4
 ```
 
-3. make the file executable
+- Download the [Selenium WebDriver](https://chromedriver.chromium.org/downloads) as same as your Chrome version then unzip it.
+
+you need **root** to do next step:
+
+- Move the file to right place
+
+```
+mv /home/<user>/Downloads/<unzipped file> /usr/local/share/chromedriver
+```
+
+- make the file executable
 
 ```
 chmod +x /usr/local/share/chromedriver
 ```
 
-4. Link them together
+- Link them together
+
 ```
 sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+```
+
+```
 sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 ```
