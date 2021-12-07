@@ -1,48 +1,59 @@
-import time
+# importing modules
+import warnings
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.select import Select
 from bs4 import BeautifulSoup
+from selenium.webdriver.support.select import Select
+
+# ignoring elements error
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+years = ["https://registrar.kfupm.edu.sa/CurrentAcadYear"]#, "https://registrar.kfupm.edu.sa/PastAcadYear"]
+prep = ['', 'Prep']
 
 driver = webdriver.Chrome()
 driver.maximize_window()
-driver.get("https://registrar.kfupm.edu.sa/CurrentAcadYear")
+gap_line = False
+aca = False
 
-html = driver.page_source
-soup = BeautifulSoup(html, 'html.parser')
-tt = soup.find_all('option')
-
-
-for i in range(1, len(tt)):
-     select = Select(driver.find_element_by_id('CntntPlcHldr_ddlAcadClndr'))
-     select.select_by_value(tt[i]["value"])
-     time.sleep(2)
+for i in years:
+     driver.get(i)
      html = driver.page_source
      soup = BeautifulSoup(html, 'html.parser')
-     table = soup.find(class_="table table-striped")
-     table_rows = table.find_all("tr")
 
-     for tr in table_rows:
-          td = tr.find_all('td')
-          if (len(td) != 0):
-               for j in td:
-                    if (td.find("Last day before") != -1):
-                         continue
-                    elif ((td.find("Classes begin") != -1) or(td.find("Holiday") != -1) or (td.find("resume") != -1) or (td.find("Break") != -1) or (td.find("Normal") != -1) or (td.find("Last day of classes") != -1)):
-                         print(td[3].text, end= ", ")
-                         print(td[4].text)
-     print("\n\n\n\n\n")
-     # string = str(table_rows).replace("[", "").replace("]", "")
+     for j in (0, 0):
+          if aca == False:
+               driver.find_element_by_id('CntntPlcHldr_rbtACAD_' + str(j)).click()
+               html = driver.page_source
+               soup = BeautifulSoup(html, 'html.parser')
+               if (gap_line == False):
+                    gap_line = True
+               else:
+                    print("\n", end="")
+               print((soup.find_all('h3')[0].text).replace(' :', ''))
 
-     # soup = BeautifulSoup(string, 'html.parser')
-     # for tr in event:
-     #      td = event.find_all
-     # event = soup.find_all("a")
+               choices = soup.find_all('option')
+
+               for k in range(1, len(choices)):
+                    options = Select(driver.find_element_by_id('CntntPlcHldr_ddlAcadClndr'))# + prep[j]))
+                    options.select_by_value(choices[k]['value'])
+                    print("\t" + choices[k]['value'])
+                    html = driver.page_source
+                    soup = BeautifulSoup(html, 'html.parser')
+                    table = soup.find(class_="table table-striped")
+                    table_rows = table.find_all("tr")
+
+                    for h in table_rows:
+                         elements = h.find_all('td')
+                         if (len(elements) != 0):
+                              date = elements[3].text
+                              event = elements[4].text
+
+                              if (event.find("Last day before") != -1):
+                                   continue
+                              elif ((event.find("Classes begin") != -1) or(event.find("Holiday") != -1) or (event.find("resume") != -1) or (event.find("Break") != -1) or (event.find("Normal") != -1) or (event.find("Last day of classes") != -1)):
+                                   print("\t\t" + date + ", " + event)
+               aca = True
+
 driver.close()
 
-
-
-     # driver.execute_script("window.open('https://registrar.kfupm.edu.sa/PastAcadYear', 'new_window')")
-
-#open tab
-     # new = driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't')
+# webDriver(years)
