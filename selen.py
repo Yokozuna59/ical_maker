@@ -9,7 +9,7 @@ warnings.filterwarnings("ignore", category = DeprecationWarning)
 
 # open and maximize the browser
 driver = webdriver.Chrome()
-driver.maximize_window()
+driver. minimize_window()
 
 # the bool statement for gap line
 gap_line = False
