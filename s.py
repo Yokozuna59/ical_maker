@@ -1,18 +1,45 @@
-# importing modules
+# import modules
+          # import sys
 import warnings
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.support.select import Select
-import sys
 
-sys.argv[2:]
+# check if there is argv
+          # if (len(sys.argv[1:]) != 0):
+          #      argv = sys.argv[1:]
 
-# ignores the waring
+# ignore the warning
 warnings.filterwarnings("ignore", category = DeprecationWarning)
 
-# open and minimize the browser
+# open a browser and minimize it
 driver = webdriver.Chrome()
-driver. minimize_window()
+driver.minimize_window()
+
+# create list
+          # full_path = []
+
+# open the registrar website and get the "current" amd "past" year url
+          # driver.get("https://registrar.kfupm.edu.sa")
+          # current_page = driver.page_source
+          # soup = BeautifulSoup(current_page, "html.parser")
+          # academic_calendars = soup.find(class_ = "dropdown-menu")
+          # current_past = academic_calendars.find_all("a")
+          # for i in (2, 4):
+          #      full_path.append(current_past[i]["href"])
+
+
+          # for i in full_path:
+          #      driver.get("https://registrar.kfupm.edu.sa/" + i)
+          #      current_page = driver.page_source
+          #      soup = BeautifulSoup(current_page, "html.parser")
+          #      table = soup.find("table")
+          #      buttons = table.find_all("input")
+
+          #      radio_button = []
+          #      for j in range(len(buttons)):
+          #           radio_button.append(buttons[j]['id'])
+          #      print(radio_button)
 
 # the bool statement for gap line
 gap_line = False
