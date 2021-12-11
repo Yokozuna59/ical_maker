@@ -57,7 +57,7 @@ for i in registrar_terms:
                     year = next_year
                     year_change = True
 
-               if (event.find("last day before") != -1):
+               if (event.find("last day before") != -1) or (event.find("exams preparation break") != -1):
                     continue
                elif (event.find("classes begin") != -1) or(event.find("holiday") != -1) or (event.find("resume") != -1) or (event.find("break") != -1) or (event.find("normal") != -1) or (event.find("last day of classes") != -1):
                     splitted_date = (date.replace("%s" %year, "/" + year).replace("%s" %next_year, "/" + next_year)).split()
