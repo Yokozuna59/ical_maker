@@ -63,11 +63,11 @@ for i in registrar_terms:
                     splitted_date = (date.replace("%s" %year, "/" + year).replace("%s" %next_year, "/" + next_year)).split()
                     dates = []
 
-                    for m in splitted_date:
-                         if (year == m):
-                              dates.append("".join("/" + m))
+                    for k in splitted_date:
+                         if (year == k):
+                              dates.append("".join("/" + k))
                          else:
-                              dates.append(m)
+                              dates.append(k)
                          date = "".join(dates)
                          if (date.find(year) != -1) or (date.find(next_year) != -1):
                               pass
@@ -78,4 +78,3 @@ for i in registrar_terms:
      print(short_term, end="")
      print(" = ", end= "")
      print(terms)
-     print("\n", end="")
