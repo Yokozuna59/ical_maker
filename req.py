@@ -42,10 +42,10 @@ for i in registrar_terms:
      for j in table_rows:
           elements = j.find_all('td')
           if (len(elements) != 0):
-               date = (elements[3].text).lower()
+               date = " ".join(((elements[3].text).lower()).split())
                for k in range(len(replace_from)):
                     date = date.replace(replace_from[k], replace_to[k])
-                    event = (elements[4].text).lower()
+               event = " ".join(((elements[4].text).lower()).split())
 
                if (first_line == False):
                     splitted_date = date.replace("-", " ").split()
@@ -59,20 +59,21 @@ for i in registrar_terms:
 
                if (event.find("last day before") != -1):
                     continue
+               elif (event.find("classes begin") != -1) or(event.find("holiday") != -1) or (event.find("resume") != -1) or (event.find("break") != -1) or (event.find("normal") != -1) or (event.find("last day of classes") != -1):
+                    splitted_date = (date.replace("%s" %year, "/" + year).replace("%s" %next_year, "/" + next_year)).split()
+                    dates = []
 
-               for k in range(len(event_check)):
-                    if (event.find(event_check[k]) != -1):
-                         terms.append(date + ", " + event)
-                         # for n in range(len(splitted_date)):
-                         #      if (year == splitted_date[n]):
-                         #           print("/", end= "")
-                         #      print(splitted_date[n].replace("-/", "/"), end= "")
-
-                         #      if ((date.find(year) != -1) or (date.find(next_year) != -1)):
-                         #           pass
-                         #      else:
-                         #           print("/" + year, end= "")
-                         #      print(", " + event)
+                    for m in splitted_date:
+                         if (year == m):
+                              dates.append("".join("/" + m))
+                         else:
+                              dates.append(m)
+                         date = "".join(dates)
+                         if (date.find(year) != -1) or (date.find(next_year) != -1):
+                              pass
+                         else:
+                              date = "".join(date + "/" + year)
+                    terms.append(date + ", " + event)
 
      print(short_term, end="")
      print(" = ", end= "")
