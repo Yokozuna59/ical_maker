@@ -1,65 +1,35 @@
 # iCal Maker
 
-A simple python project gets data needed from [KFUPM Registrar](https://registrar.kfupm.edu.sa/).
+A simple python project gets `Dates` needed from [KFUPM Registrar](https://registrar.kfupm.edu.sa/).
 
-## Requirements
+## Installation
 
-- Should download [Google Chrome](https://www.google.com/chrome/).
-- Should download [Selenium WebDriver](https://chromedriver.chromium.org/downloads) **with the right version**.
-
-## Setup (Linux)
-
-### Github
-
-- Clone repository
+1. First clone the repo:
 
 ```
 git clone https://github.com/Yokozuna59/ical_maker.git
 ```
 
-### Chrome
-
-- Downloading [Google Chrome](https://www.google.com/chrome/).
-- Check your Chrome version:
+2. Create a vartual environment:
 
 ```
-google-chrome --version
+python3 -m venv enviromentName
 ```
 
-### Selenium
-
-- Installing modules
+3. Activate the virtual environment:
 
 ```
-pip3 install selenium
+source enviromentName/bin/activate
 ```
 
-```
-pip3 install beautifulsoup4
-```
-
-- Download the [Selenium WebDriver](https://chromedriver.chromium.org/downloads) as same as your Chrome version then unzip it.
-
-you need **root** to do next step:
-
-- Move the file to right place
+4. install the requirements:
 
 ```
-mv /home/<user>/Downloads/<unzipped file> /usr/local/share/chromedriver
+pip install -r requirements.txt
 ```
 
-- make the file executable
+5. Run the app:
 
 ```
-chmod +x /usr/local/share/chromedriver
-```
-
-- Link them together
-
-```
-sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
-```
-
-```
-sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
+python3 main.py
 ```

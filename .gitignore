@@ -1,5 +1,2 @@
-/CURRENT/
-/PAST/
 *.py
-!req.py
-!selen.py
+!main.py

@@ -1,3 +1,4 @@
+# import modules
 import requests
 from bs4 import BeautifulSoup
 
@@ -6,18 +7,19 @@ url = ("https://registrar.kfupm.edu.sa/CurrentAcadYear")
 r = (requests.get(url)).text
 soup = BeautifulSoup(r, 'html.parser')
 
-#.replace("-%s" %term, " " + str(term)).replace("-%s" %next_year, " " + str(next_year)).split())
+# create a list to add the terms in the registrar page
+registrar_terms = []
+options_of_terms = soup.find_all('option')
+for i in options_of_terms:
+     if (i["value"].find("0") != 0):
+          registrar_terms.append(i["value"])
+
+# create lists for the replace loop
 replace_from = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 replace_to = ["/1", "/2", "/3", "/4", "/5", "/6", "/7", "/8", "/9", "/10", "/11", "/12", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 
+# create lists for the check loop
 event_check = ["classes begin", "holiday", "resume", "break", "normal", "last day of classes"]
-#if (event.find("Last day before") != -1):
-
-registrar_terms = []
-choices = soup.find_all('option')
-for i in choices:
-     if (i["value"].find("0") != 0):
-          registrar_terms.append(i["value"])
 
 for i in registrar_terms:
      first_line = False
