@@ -3,7 +3,7 @@ brotli==1.0.9
 cchardet==2.1.7
 cffi==1.15.0
 coverage==6.2
-cryptography==3.2
+cryptography==3.3.2
 curio==1.5
 Cython==0.29.25
 dl==0.1.0
