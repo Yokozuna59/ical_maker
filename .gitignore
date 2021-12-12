@@ -1,4 +1,5 @@
 *CURRENT/
 *PAST/
-*.compined.py
-*.s.py
+*.py
+!compined.py
+!s.py
