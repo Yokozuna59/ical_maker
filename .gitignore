@@ -1,5 +1,5 @@
 /CURRENT/
 /PAST/
-
-.compined.py
-.s.py
+*.py
+!req.py
+!selen.py
