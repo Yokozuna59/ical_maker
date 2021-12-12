@@ -1,8 +1,5 @@
 /CURRENT/
 /PAST/
 
-# remove every python file
-*.py
-
-!req.py
-!selen.py
+.compined.py
+.s.py
