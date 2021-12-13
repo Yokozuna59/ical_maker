@@ -2,6 +2,7 @@
 import requests
 import ast
 from bs4 import BeautifulSoup
+import time
 
 # create the URL variable
 url = ("https://registrar.kfupm.edu.sa/CurrentAcadYear")
@@ -37,47 +38,49 @@ for i in range(len(splitted_payloads)):
           payload[key] = j
           html = (requests.post(url, data = payload)).text
           soup = BeautifulSoup(html, 'html.parser')
-          table = soup.find(class_ = "table table-striped")
-          table_rows = table.find_all("tr")
+          table = soup.find_all(class_ = "table-responsive")
+          for k in table:
+               if (len(k.text) != 4):
+                    table_rows = k.find_all("tr")
 
-          for k in table_rows:
-               elements = k.find_all('td')
-               if (len(elements) != 0):
-                    date = " ".join(((elements[3].text).lower()).split())
-                    for k in range(len(replace_from)):
-                         date = date.replace(replace_from[k], replace_to[k])
-                    event = " ".join(((elements[4].text).lower()).split())
+                    for k in table_rows:
+                         elements = k.find_all('td')
+                         if (len(elements) != 0):
+                              date = " ".join(((elements[3].text).lower()).split())
+                              for k in range(len(replace_from)):
+                                   date = date.replace(replace_from[k], replace_to[k])
+                              event = " ".join(((elements[4].text).lower()).split())
 
-                    if (first_line == False):
-                         splitted_date = date.replace("-", " ").split()
-                         year = splitted_date[-1]
-                         next_year = str(int(year) + 1)
-                         first_line = True
+                              if (first_line == False):
+                                   splitted_date = date.replace("-", " ").split()
+                                   year = splitted_date[-1]
+                                   next_year = str(int(year) + 1)
+                                   first_line = True
 
-                    if (date.find(next_year) != -1):
-                         year = next_year
-                         year_change = True
+                              if (date.find(next_year) != -1):
+                                   year = next_year
+                                   year_change = True
 
-                    if (event.find("last day before") != -1) or (event.find("exams preparation break") != -1):
-                         continue
-                    elif (event.find("classes begin") != -1) or(event.find("holiday") != -1) or (event.find("resume") != -1) or (event.find("break") != -1) or (event.find("normal") != -1) or (event.find("last day of classes") != -1):
-                         splitted_date = (date.replace("%s" %year, "/" + year).replace("%s" %next_year, "/" + next_year)).split()
-                         dates = []
+                              if (event.find("last day before") != -1) or (event.find("exams preparation break") != -1):
+                                   continue
+                              elif (event.find("classes begin") != -1) or(event.find("holiday") != -1) or (event.find("resume") != -1) or (event.find("break") != -1) or (event.find("normal") != -1) or (event.find("last day of classes") != -1):
+                                   splitted_date = (date.replace("%s" %year, "/" + year).replace("%s" %next_year, "/" + next_year)).split()
+                                   dates = []
 
-                         for m in splitted_date:
-                              if (year == m):
-                                   dates.append("".join("/" + m))
-                              else:
-                                   dates.append(m)
-                              date = "".join(dates)
-                              if (date.find(year) != -1) or (date.find(next_year) != -1):
-                                   pass
-                              else:
-                                   date = "".join(date + "/" + year)
-                         terms.append(date + ", " + event)
+                                   for m in splitted_date:
+                                        if (year == m):
+                                             dates.append("".join("/" + m))
+                                        else:
+                                             dates.append(m)
+                                        date = "".join(dates)
+                                        if (date.find(year) != -1) or (date.find(next_year) != -1):
+                                             pass
+                                        else:
+                                             date = "".join(date + "/" + year)
+                                   terms.append(date + ", " + event)
 
-          print(terms[0])
-          print(terms[-1])
-          print(short_term, end="")
-          print(" = ", end= "")
-          print(terms)
+                    # print(terms[0])
+                    # print(terms[-1])
+                    print(short_term, end="")
+                    print(" = ", end= "")
+                    print(terms)
