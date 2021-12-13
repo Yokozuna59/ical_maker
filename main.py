@@ -36,18 +36,21 @@ for i in range(len(splitted_payloads)):
                registrar_terms.append(j["value"])
 
      for j in registrar_terms:
-          first_line = False
-          short_term = academic_prep[i] + j[2:5]
-
           key = list(payload.keys())[-1]
           payload[key] = j
           html = (requests.post(url, data = payload)).text
           soup = BeautifulSoup(html, 'html.parser')
           table = soup.find_all(class_ = "table-responsive")
-          for k in table:
-               if (len(k.text) != 4):
+
+          for k in range(len(table)):
+               first_line = False
+               short_term = academic_prep[i] + j[2:5]
+               if (len(table[k].text) != 4):
+                    if (i == 1):
+                         short_term += half[k]
                     terms = []
-                    table_rows = k.find_all("tr")
+
+                    table_rows = table[k].find_all("tr")
                     for k in table_rows:
                          elements = k.find_all('td')
                          if (len(elements) != 0):
@@ -72,11 +75,11 @@ for i in range(len(splitted_payloads)):
                                    splitted_date = (date.replace("%s" %year, "/" + year).replace("%s" %next_year, "/" + next_year)).split()
                                    dates = []
 
-                                   for m in splitted_date:
-                                        if (year == m):
-                                             dates.append("".join("/" + m))
+                                   for k in splitted_date:
+                                        if (year == k):
+                                             dates.append("".join("/" + k))
                                         else:
-                                             dates.append(m)
+                                             dates.append(k)
                                         date = "".join(dates)
                                         if (date.find(year) != -1) or (date.find(next_year) != -1):
                                              pass
