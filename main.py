@@ -2,18 +2,24 @@
 import requests
 import ast
 from bs4 import BeautifulSoup
-import time
 
-# create the URL variable
+# create the "url" variable
 url = ("https://registrar.kfupm.edu.sa/CurrentAcadYear")
 
-# create lists for the replacement loop
+# create two lists for the replacement loop
 replace_from = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 replace_to = ["/1", "/2", "/3", "/4", "/5", "/6", "/7", "/8", "/9", "/10", "/11", "/12", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-# create lists for the check loop
+
+# create a list for the check loop
 event_check = ["classes begin", "holiday", "resume", "break", "normal", "last day of classes"]
 
-# open and read the payloads.txt file
+# create a list for the "Academic" and "Prep" year
+academic_prep = ["A", "P"]
+
+# create a list for the halfs "First" and "Second"
+half = ["F", "S"]
+
+# open and read the payloads.txt file then split split it to two
 payloads = open("payloads.txt", "r").read()
 splitted_payloads = payloads.split("~~~")
 
@@ -31,8 +37,7 @@ for i in range(len(splitted_payloads)):
 
      for j in registrar_terms:
           first_line = False
-          short_term = j[2:5]
-          terms = []
+          short_term = academic_prep[i] + j[2:5]
 
           key = list(payload.keys())[-1]
           payload[key] = j
@@ -41,8 +46,8 @@ for i in range(len(splitted_payloads)):
           table = soup.find_all(class_ = "table-responsive")
           for k in table:
                if (len(k.text) != 4):
+                    terms = []
                     table_rows = k.find_all("tr")
-
                     for k in table_rows:
                          elements = k.find_all('td')
                          if (len(elements) != 0):
@@ -79,8 +84,6 @@ for i in range(len(splitted_payloads)):
                                              date = "".join(date + "/" + year)
                                    terms.append(date + ", " + event)
 
-                    # print(terms[0])
-                    # print(terms[-1])
                     print(short_term, end="")
                     print(" = ", end= "")
                     print(terms)
