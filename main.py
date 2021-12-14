@@ -8,85 +8,114 @@ url = ("https://registrar.kfupm.edu.sa/CurrentAcadYear")
 
 # create two lists for the replacement loop
 replace_from = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-replace_to = ["/1", "/2", "/3", "/4", "/5", "/6", "/7", "/8", "/9", "/10", "/11", "/12", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+replace_to = ["01/", "02/", "03/", "04/", "05/", "06/", "07/", "08/", "09/", "10/", "11/", "12/", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 
 # create a list for the check loop
 event_check = ["classes begin", "holiday", "resume", "break", "normal", "last day of classes"]
 
 # create a list for the "Academic" and "Prep" year
-academic_prep = ["A", "P"]
+academic_prep = ["ACAD ", "PREP "]
 
-# create a list for the halfs "First" and "Second"
-half = ["F", "S"]
+# create a list for the "First" and "Second" halfs
+halfs = [" FIRST", " SECOND"]
 
-# open and read the payloads.txt file then split split it to two
+# open and read the payloads.txt file then split split it by "~~~"
 payloads = open("payloads.txt", "r").read()
 splitted_payloads = payloads.split("~~~")
 
+# do a for loop with "Academic" and "Prep" years
 for i in range(len(splitted_payloads)):
+     # create a list to add the terms from registrar page
+     registrar_terms = []
+
+     # get the element and convert it to dictionary then post the request and scrap the page
      payload = ast.literal_eval(splitted_payloads[i])
      html = (requests.post(url, data = payload)).text
      soup = BeautifulSoup(html, 'html.parser')
 
-     # create a list to add the terms
-     registrar_terms = []
+     # get the options of terms and add it to the list
      options_of_terms = soup.find_all('option')
      for j in options_of_terms:
           if (j["value"].find("0") != 0):
                registrar_terms.append(j["value"])
 
+     # do a for loop with terms from registrar
      for j in registrar_terms:
-          key = list(payload.keys())[-1]
-          payload[key] = j
+          # get the last key from payload then assign new value for it and scrap the page
+          last_key = list(payload.keys())[-1]
+          payload[last_key] = j
           html = (requests.post(url, data = payload)).text
           soup = BeautifulSoup(html, 'html.parser')
+
+          # get all classes with "table-responsive" then use it in for loop
           table = soup.find_all(class_ = "table-responsive")
-
           for k in range(len(table)):
-               first_line = False
-               short_term = academic_prep[i] + j[2:5]
+               # ignore the empty table
                if (len(table[k].text) != 4):
-                    if (i == 1):
-                         short_term += half[k]
-                    terms = []
+                    # create a bool variable to check if the first line have been checked yet or not
+                    first_line = False
 
-                    table_rows = table[k].find_all("tr")
-                    for k in table_rows:
-                         elements = k.find_all('td')
-                         if (len(elements) != 0):
-                              date = " ".join(((elements[3].text).lower()).split())
+                    # create an empty list to the needed dates with event
+                    needed_events = []
+
+                    # create the short name term variable, e.g. "211"
+                    short_term = j[2:5]
+
+                    # creat a full term variable
+                    term = academic_prep[i] + short_term
+
+                    # check if i is 0 == ACAD, 1 == PREP
+                    if (i == 1):
+                         term += halfs[k]
+
+                    # get the table's columns and use it in the for loop
+                    columns = table[k].find_all("tr")
+                    for k in columns:
+                         # get the column rows and get the needed ones
+                         rows = k.find_all('td')
+
+                         # ignore the empty row
+                         if (len(rows) != 0):
+                              # get the date and event then make them lowercase then remove double space
+                              date = " ".join(((rows[3].text).lower()).split())
+                              event = " ".join(((rows[4].text).lower()).split())
+
+                              # use the current index and replace word from the replacement lists
                               for k in range(len(replace_from)):
                                    date = date.replace(replace_from[k], replace_to[k])
-                              event = " ".join(((elements[4].text).lower()).split())
 
+                              # check the first line bool statement
                               if (first_line == False):
-                                   splitted_date = date.replace("-", " ").split()
+                                   splitted_date = date.split()
                                    year = splitted_date[-1]
                                    next_year = str(int(year) + 1)
                                    first_line = True
-
-                              if (date.find(next_year) != -1):
+                              elif (date.find(next_year) != -1):
                                    year = next_year
-                                   year_change = True
 
                               if (event.find("last day before") != -1) or (event.find("exams preparation break") != -1):
                                    continue
                               elif (event.find("classes begin") != -1) or(event.find("holiday") != -1) or (event.find("resume") != -1) or (event.find("break") != -1) or (event.find("normal") != -1) or (event.find("last day of classes") != -1):
-                                   splitted_date = (date.replace("%s" %year, "/" + year).replace("%s" %next_year, "/" + next_year)).split()
+                                   splitted_date = (date.replace("%s" %year, year + "%")).split()
                                    dates = []
 
-                                   for k in splitted_date:
+                                   for k in splitted_date[::-1]:
                                         if (year == k):
-                                             dates.append("".join("/" + k))
+                                             dates.append("".join(k + "/"))
                                         else:
                                              dates.append(k)
                                         date = "".join(dates)
                                         if (date.find(year) != -1) or (date.find(next_year) != -1):
                                              pass
                                         else:
-                                             date = "".join(date + "/" + year)
-                                   terms.append(date + ", " + event)
+                                             date = "".join(year + "%" + date)
 
-                    print(short_term, end="")
+                                        if (date.find("-") != -1):
+                                             pass
+                                        else:
+                                             date = date.replace("/", "").replace("%", "")
+                                   needed_events.append(date + ", " + event)
+
+                    print(term, end="")
                     print(" = ", end= "")
-                    print(terms)
+                    print(needed_events)
