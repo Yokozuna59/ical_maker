@@ -1,6 +1,6 @@
 # iCal Maker
 
-A simple python project gets `Dates` needed from [KFUPM Registrar](https://registrar.kfupm.edu.sa/).
+A simple python project gets `included and exclude` Dates needed from [KFUPM Registrar](https://registrar.kfupm.edu.sa/).
 
 ## Installation
 
