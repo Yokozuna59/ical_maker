@@ -13,6 +13,9 @@ replace_to = ["01/", "02/", "03/", "04/", "05/", "06/", "07/", "08/", "09/", "10
 # create a list for the check loop
 event_check = ["classes begin", "holiday", "resume", "break", "normal", "last day of classes"]
 
+# months
+months = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
+
 # create a list for the "Academic" and "Prep" year
 academic_prep = ["ACAD ", "PREP "]
 
@@ -99,7 +102,7 @@ for i in range(len(splitted_payloads)):
                               # check if the event contains the key words for the needed events
                               elif (event.find("classes begin") != -1) or(event.find("holiday") != -1) or (event.find("resume") != -1) or (event.find("break") != -1) or (event.find("normal") != -1) or (event.find("last day of classes") != -1):
                                    # split full date with spaces
-                                   splitted_full_date = (full_date.split())
+                                   splitted_full_date = (full_date.replace("-", " - ").split())
 
                                    # create an empty list to add elements of splitted full date
                                    dates = []
@@ -108,7 +111,7 @@ for i in range(len(splitted_payloads)):
                                    for k in splitted_full_date[::-1]:
                                         # check if full date contains (year)
                                         if (year == k):
-                                             dates.append(k + "%")
+                                             dates.append(k)
                                         else:
                                              if ((len(k) == 1) and (k != "-")):
                                                   k = '0' + k
@@ -118,14 +121,23 @@ for i in range(len(splitted_payloads)):
                                         if (full_date.find(year) != -1):
                                              pass
                                         else:
-                                             full_date = "".join(year + "%" + full_date)
+                                             full_date = "".join(year + full_date)
 
-                                        if (full_date.find("-") != -1):
-                                             pass
+                                   if (full_date.find("-") != -1):
+                                        split_by_slash = full_date.split("/")
+                                        if len(split_by_slash) == 2:
+                                             splitted_by_days = split_by_slash[1].split("-")
+                                             for k in range(int(splitted_by_days[1]), int(splitted_by_days[0]) + 1):
+                                                  k = str(k)
+                                                  if ((len(k) == 1)):
+                                                       k = '0' + k
+                                                  needed_events.append(full_date[0:6] + k + ", " + event)
                                         else:
-                                             full_date = full_date.replace("/", "").replace("%", "")
-
-                                   needed_events.append(full_date + ", " + event)
+                                             split_by_slash = (" ".join(split_by_slash)).split("%")
+                                             #print(split_by_slash[1::])
+                                   else:
+                                        full_date = full_date.replace("/", "")
+                                        needed_events.append(full_date + ", " + event)
 
                     print(term, end="")
                     print(" = ", end= "")
