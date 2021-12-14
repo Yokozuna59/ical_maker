@@ -76,45 +76,56 @@ for i in range(len(splitted_payloads)):
 
                          # ignore the empty row
                          if (len(rows) != 0):
-                              # get the date and event then make them lowercase then remove double space
-                              date = " ".join(((rows[3].text).lower()).split())
+                              # get the full date and event then make them lowercase then remove double space
+                              full_date = " ".join(((rows[3].text).lower()).split())
                               event = " ".join(((rows[4].text).lower()).split())
 
                               # use the current index and replace word from the replacement lists
                               for k in range(len(replace_from)):
-                                   date = date.replace(replace_from[k], replace_to[k])
+                                   full_date = full_date.replace(replace_from[k], replace_to[k])
 
                               # check the first line bool statement
                               if (first_line == False):
-                                   splitted_date = date.split()
-                                   year = splitted_date[-1]
+                                   splitted_full_date = full_date.split()
+                                   year = splitted_full_date[-1]
                                    next_year = str(int(year) + 1)
                                    first_line = True
-                              elif (date.find(next_year) != -1):
+                              elif (full_date.find(next_year) != -1):
                                    year = next_year
 
+                              # ignore if the event contains "last day before" and "exams preparation break"
                               if (event.find("last day before") != -1) or (event.find("exams preparation break") != -1):
                                    continue
+                              # check if the event contains the key words for the needed events
                               elif (event.find("classes begin") != -1) or(event.find("holiday") != -1) or (event.find("resume") != -1) or (event.find("break") != -1) or (event.find("normal") != -1) or (event.find("last day of classes") != -1):
-                                   splitted_date = (date.replace("%s" %year, year + "%")).split()
+                                   # split full date with spaces
+                                   splitted_full_date = (full_date.split())
+
+                                   # create an empty list to add elements of splitted full date
                                    dates = []
 
-                                   for k in splitted_date[::-1]:
+                                   # get elements from the splitted full date reversed: (YEAR, MONTH, DAY)
+                                   for k in splitted_full_date[::-1]:
+                                        # check if full date contains (year)
                                         if (year == k):
-                                             dates.append("".join(k + "/"))
+                                             dates.append(k + "%")
                                         else:
+                                             if ((len(k) == 1) and (k != "-")):
+                                                  k = '0' + k
                                              dates.append(k)
-                                        date = "".join(dates)
-                                        if (date.find(year) != -1) or (date.find(next_year) != -1):
-                                             pass
-                                        else:
-                                             date = "".join(year + "%" + date)
 
-                                        if (date.find("-") != -1):
+                                        full_date = "".join(dates)
+                                        if (full_date.find(year) != -1):
                                              pass
                                         else:
-                                             date = date.replace("/", "").replace("%", "")
-                                   needed_events.append(date + ", " + event)
+                                             full_date = "".join(year + "%" + full_date)
+
+                                        if (full_date.find("-") != -1):
+                                             pass
+                                        else:
+                                             full_date = full_date.replace("/", "").replace("%", "")
+
+                                   needed_events.append(full_date + ", " + event)
 
                     print(term, end="")
                     print(" = ", end= "")
