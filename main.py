@@ -132,14 +132,15 @@ for i in range(len(splitted_payloads)):
                                                        k = '0' + k
                                                   needed_events.append(full_date[0:6] + k + ", " + event)
                                         else:
-                                             print(split_by_slash)
                                              for k in (0,2):
+                                                  month = split_by_slash[k + 1]
                                                   if (k == 2):
                                                        days = 1
+                                                       month_days = split_by_slash[k]
                                                   else:
                                                        days = split_by_slash[k]
-                                                  month = split_by_slash[k + 1]
-                                                  month_days = months[int(month) - 1]
+                                                       month_days = months[int(month) - 1]
+
                                                   for k in range(int(days) , int(month_days) + 1):
                                                        k = str(k)
                                                        if ((len(k) == 1)):
