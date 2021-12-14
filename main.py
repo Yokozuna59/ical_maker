@@ -157,7 +157,6 @@ for i in range(len(splitted_payloads)):
                                              needed_events.append(full_date + ", " + event)
 
                                         elif len(split_by_slash) == 3:
-                                             print(int(split_by_slash[1]) + 1)
                                              for k in range(int(split_by_slash[0]), int(split_by_slash[1]) + 1):
                                                   k = str(k)
                                                   if ((len(k) == 1)):
@@ -182,6 +181,19 @@ for i in range(len(splitted_payloads)):
                                         full_date = full_date.replace("/", "")
                                         needed_events.append(full_date + ", " + event)
 
-                    print(term, end="")
+                    for m in needed_events:
+                         if ((m.find("classes begin") != -1) or (m.find("resume") != -1) or (m.find("last day of classes") != -1)):
+                              included_dates.append(m)
+                         else:
+                              print
+                              excluded_dates.append(m)
+
+                    print(term, end=" INCLUDE")
                     print(" = ", end= "")
-                    print(needed_events)
+                    print(included_dates)
+                    print(term, end=" EXCLUDE")
+                    print(" = ", end= "")
+                    if (len(excluded_dates) == 0):
+                         print(None)
+                    else:
+                         print(excluded_dates)
