@@ -124,17 +124,27 @@ for i in range(len(splitted_payloads)):
                                              full_date = "".join(year + full_date)
 
                                    if (full_date.find("-") != -1):
-                                        split_by_slash = full_date.split("/")
-                                        if len(split_by_slash) == 2:
-                                             splitted_by_days = split_by_slash[1].split("-")
-                                             for k in range(int(splitted_by_days[1]), int(splitted_by_days[0]) + 1):
+                                        split_by_slash = (" ".join((" ".join(full_date[4::].split("/"))).split("-")).split())[::-1]
+                                        if len(split_by_slash) == 3:
+                                             for k in range(int(split_by_slash[0]), int(split_by_slash[1]) + 1):
                                                   k = str(k)
                                                   if ((len(k) == 1)):
                                                        k = '0' + k
                                                   needed_events.append(full_date[0:6] + k + ", " + event)
                                         else:
-                                             split_by_slash = (" ".join(split_by_slash)).split("%")
-                                             #print(split_by_slash[1::])
+                                             print(split_by_slash)
+                                             for k in (0,2):
+                                                  if (k == 2):
+                                                       days = 1
+                                                  else:
+                                                       days = split_by_slash[k]
+                                                  month = split_by_slash[k + 1]
+                                                  month_days = months[int(month) - 1]
+                                                  for k in range(int(days) , int(month_days) + 1):
+                                                       k = str(k)
+                                                       if ((len(k) == 1)):
+                                                            k = '0' + k
+                                                       needed_events.append(full_date[0:4] + month + k + ", " + event)
                                    else:
                                         full_date = full_date.replace("/", "")
                                         needed_events.append(full_date + ", " + event)
