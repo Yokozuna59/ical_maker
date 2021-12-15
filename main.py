@@ -14,10 +14,10 @@ replace_to = ["01/", "02/", "03/", "04/", "05/", "06/", "07/", "08/", "09/", "10
 day_of_months = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
 
 # create a list for the "Academic" and "Prep" year
-academic_prep = ["ACAD ", "PREP "]
+academic_prep = ["acad ", "prep "]
 
-# create a list for the "First" and "Second" halfs
-halfs = [" FIRST", " SECOND"]
+# create a list for the "first" and "second" halfs
+halfs = [" fisrt", " second"]
 
 # open and read the payloads.txt file then split split it by "~~~"
 payloads = open("payloads.txt", "r").read()
@@ -39,7 +39,7 @@ for i in range(len(splitted_payloads)):
           if (j["value"].find("0") != 0):
                registrar_terms.append(j["value"])
 
-     # do a for loop with terms from registrar
+     # for loop with terms from registrar
      for j in registrar_terms:
           # get the last key from payload then assign new value for it and scrap the page
           last_key = list(payload.keys())[-1]
@@ -55,7 +55,7 @@ for i in range(len(splitted_payloads)):
                     # create a bool variable to check if the first line have been checked yet or not
                     first_line = False
 
-                    # create an empty list to the needed dates with event
+                    # create empty lists to the included and excluded dates
                     needed_events = []
                     excluded_dates = []
                     included_dates = []
@@ -188,10 +188,10 @@ for i in range(len(splitted_payloads)):
                               print
                               excluded_dates.append(m)
 
-                    print(term, end=" INCLUDE")
+                    print(term, end=" include")
                     print(" = ", end= "")
                     print(included_dates)
-                    print(term, end=" EXCLUDE")
+                    print(term, end=" exclude")
                     print(" = ", end= "")
                     if (len(excluded_dates) == 0):
                          print(None)
