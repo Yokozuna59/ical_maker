@@ -2,6 +2,7 @@
 import requests
 import ast
 from bs4 import BeautifulSoup
+import json
 
 # create the "url" variable
 url = ("https://registrar.kfupm.edu.sa/CurrentAcadYear")
@@ -10,16 +11,14 @@ url = ("https://registrar.kfupm.edu.sa/CurrentAcadYear")
 replace_from = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 replace_to = ["01/", "02/", "03/", "04/", "05/", "06/", "07/", "08/", "09/", "10/", "11/", "12/", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 
-# create a list to get the number of days in the index month
-day_of_months = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
+# create lists
+days_of_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"] # list to get the number of days in the index month
 
-# create a list for the "Academic" and "Prep" year
-academic_prep = ["acad ", "prep "]
+academic_prep = ["ACAD", "PREP"] # list for the "ACAD" and "PREP" years
+halfs = ["FIRST", "SECOND"] # list for the "FIRST" and "SECOND" halfs
+include_exlucde = ["INCLUDE", "EXCLUDE"] # list for the "INCLUDE" and "EXCLUDE" dates
 
-# create a list for the "first" and "second" halfs
-halfs = [" fisrt", " second"]
-
-# open and read the payloads.txt file then split split it by "~~~"
+# open and read the "payloads.txt" file then split split it by "~~~"
 payloads = open("payloads.txt", "r").read()
 splitted_payloads = payloads.split("~~~")
 
@@ -142,7 +141,7 @@ for i in range(len(splitted_payloads)):
                                                        if (k == 0):
                                                             month = month_before_resume
                                                             days = day_before_resume
-                                                            month_days = day_of_months[int(month_before_resume) - 1]
+                                                            month_days = days_of_month[int(month_before_resume) - 1]
                                                        else:
                                                             month = split_by_slash[1]
                                                             days = 1
@@ -170,7 +169,7 @@ for i in range(len(splitted_payloads)):
                                                        month_days = split_by_slash[k]
                                                   else:
                                                        days = split_by_slash[k]
-                                                       month_days = day_of_months[int(month) - 1]
+                                                       month_days = days_of_month[int(month) - 1]
 
                                                   for k in range(int(days) , int(month_days) + 1):
                                                        k = str(k)
@@ -188,10 +187,10 @@ for i in range(len(splitted_payloads)):
                               print
                               excluded_dates.append(m)
 
-                    print(term, end=" include")
+                    print(term, end=" INCLUDE")
                     print(" = ", end= "")
                     print(included_dates)
-                    print(term, end=" exclude")
+                    print(term, end=" EXCLUDE")
                     print(" = ", end= "")
                     if (len(excluded_dates) == 0):
                          print(None)
