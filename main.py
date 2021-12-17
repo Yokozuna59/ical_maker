@@ -4,27 +4,44 @@ import ast
 from bs4 import BeautifulSoup
 import json
 
-# def path_url():
-#      current_past = ["CurrentAcadYear", "PastAcadYear"]
-#      return current_past
+def path_url(i):
+     current_past = ["CurrentAcadYear", "PastAcadYear"]
+     return current_past[i]
 
-# def halfs():
-#      halfs = ["FIRST", "SECOND"]
-#      return halfs
+def halfs():
+     halfs = ["FIRST", "SECOND"]
+     return halfs
 
-# def days_month():
-#      days_of_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
-#      return days_month
+def days_month(month):
+     days_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
+     return days_month[month]
 
-# def payloads():
-#      pass
+
+def payloads():
+     current_acad = ast.literal_eval(open("payloads/current/acad.json").read())
+     current_prep = ast.literal_eval(open("payloads/current/prep.json").read())
+
+     past_acad = ast.literal_eval(open("payloads/past/acad.json").read())
+     past_prep = ast.literal_eval(open("payloads/past/prep.json").read())
+
+     return current_acad, current_prep, past_acad, past_prep
+# print(payloads()[2])
+
+
+
+
+
+
+
 
 def main():
-     # create a list
-     current_past = ["CurrentAcadYear", "PastAcadYear"]
+     # for i in (0,1):
+     url = ("https://registrar.kfupm.edu.sa/currentacadyear")
+     #      for i in (0,3):
+     #           html = (requests.post(url, data=i)).text
+     #           soup = BeautifulSoup(html, 'html.parser')
+     #           print(soup)
 
-     # create the "url" variable
-     url = "https://registrar.kfupm.edu.sa/CurrentAcadYear"
 
      # create lists
      halfs = ["FIRST", "SECOND"] # list for the "FIRST" and "SECOND" halfs
