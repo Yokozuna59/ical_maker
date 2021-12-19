@@ -5,43 +5,66 @@ from bs4 import BeautifulSoup
 import json
 
 def path_url(i):
-     current_past = ["CurrentAcadYear", "PastAcadYear"]
-     return current_past[i]
+     path = ["Current", "Past"]
 
-def halfs():
-     halfs = ["FIRST", "SECOND"]
-     return halfs
-
-def days_month(month):
-     days_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
-     return days_month[month]
+     return path[i]
 
 
-def payloads():
+def payloads(i):
      current_acad = ast.literal_eval(open("payloads/current/acad.json").read())
      current_prep = ast.literal_eval(open("payloads/current/prep.json").read())
 
      past_acad = ast.literal_eval(open("payloads/past/acad.json").read())
      past_prep = ast.literal_eval(open("payloads/past/prep.json").read())
 
-     return current_acad, current_prep, past_acad, past_prep
-# print(payloads()[2])
+     if (i == 0):
+           return current_acad, current_prep
+     elif (i == 1):
+          return past_acad, past_prep
+
+
+def terms():
+     current_acad_terms = []
+     current_prep_terms = []
+     past_acad_terms = []
+     past_prep_terms = []
+
+     for i in (0,1):
+          url = ("https://registrar.kfupm.edu.sa/{}AcadYear".format(path_url(i)))
+          for j in (0,1):
+               payload = payloads(i)[j]
+               html = (requests.post(url, data=payload)).text
+               soup = BeautifulSoup(html, 'html.parser')
+
+               options_of_terms = soup.find_all('option')
+               for k in options_of_terms:
+                    if (k["value"].find("0") != 0):
+                         if (path_url(i) == "Current"):
+                              if (j == 0):
+                                   current_acad_terms.append(k["value"])
+                              else:
+                                   current_prep_terms.append(k["value"])
+                         else:
+                              if (j == 0):
+                                   past_acad_terms.append(k["value"])
+                              else:
+                                   past_prep_terms.append(k["value"])
+     return current_acad_terms, current_prep_terms, past_acad_terms, past_prep_terms
+
+print(terms())
 
 
 
 
 
 
+def days_month(month):
+     days_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
+     return days_month[month]
 
 
-def main():
-     # for i in (0,1):
+def main2():
      url = ("https://registrar.kfupm.edu.sa/currentacadyear")
-     #      for i in (0,3):
-     #           html = (requests.post(url, data=i)).text
-     #           soup = BeautifulSoup(html, 'html.parser')
-     #           print(soup)
-
 
      # create lists
      halfs = ["FIRST", "SECOND"] # list for the "FIRST" and "SECOND" halfs
@@ -234,5 +257,3 @@ def main():
                               print(None)
                          else:
                               print(excluded_dates)
-
-main()
