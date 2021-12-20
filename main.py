@@ -4,54 +4,75 @@ import ast
 from bs4 import BeautifulSoup
 import json
 
-def path_url(i):
-     path = ["Current", "Past"]
+def get_urls():
+     urls = ["https://registrar.kfupm.edu.sa/CurrentAcadYear", "https://registrar.kfupm.edu.sa/PastAcadYear"]
+     return urls
 
-     return path[i]
 
-
-def payloads(i):
+def get_payloads():
      current_acad = ast.literal_eval(open("payloads/current/acad.json").read())
      current_prep = ast.literal_eval(open("payloads/current/prep.json").read())
 
      past_acad = ast.literal_eval(open("payloads/past/acad.json").read())
      past_prep = ast.literal_eval(open("payloads/past/prep.json").read())
-
-     if (i == 0):
-           return current_acad, current_prep
-     elif (i == 1):
-          return past_acad, past_prep
+     return current_acad, current_prep, past_acad, past_prep
 
 
-def terms():
+def get_terms():
+     urls = get_urls()
+     payloads = get_payloads()
+
      current_acad_terms = []
      current_prep_terms = []
      past_acad_terms = []
      past_prep_terms = []
 
-     for i in (0,1):
-          url = ("https://registrar.kfupm.edu.sa/{}AcadYear".format(path_url(i)))
-          for j in (0,1):
-               payload = payloads(i)[j]
+     for url in urls:
+          for payload in payloads:
                html = (requests.post(url, data=payload)).text
                soup = BeautifulSoup(html, 'html.parser')
+               options = soup.find_all('option')
 
-               options_of_terms = soup.find_all('option')
-               for k in options_of_terms:
-                    if (k["value"].find("0") != 0):
-                         if (path_url(i) == "Current"):
-                              if (j == 0):
-                                   current_acad_terms.append(k["value"])
+               for option in options:
+                    if (option["value"].find("0") != 0):
+                         if (url.find("Current") != -1):
+                              if (option.text.find("Prep") != -1):
+                                   current_prep_terms.append(option["value"])
                               else:
-                                   current_prep_terms.append(k["value"])
-                         else:
-                              if (j == 0):
-                                   past_acad_terms.append(k["value"])
+                                   current_acad_terms.append(option["value"])
+                         elif (url.find("Past") != -1):
+                              if (option.text.find("Prep") != -1):
+                                   past_prep_terms.append(option["value"])
                               else:
-                                   past_prep_terms.append(k["value"])
+                                   past_acad_terms.append(option["value"])
      return current_acad_terms, current_prep_terms, past_acad_terms, past_prep_terms
 
-print(terms())
+
+def table():
+     urls = get_urls()
+     terms = get_terms()
+     payloads = get_payloads()
+
+     for url in urls:
+          for index_payload in range(len(payloads)):
+               for page in range(len(terms)):
+                    if (url.find("Current") != -1):
+                         if (page == 2):
+                              break
+                    elif (url.find("Past") != -1):
+                         page = 2
+                         index_payload = 2
+                    if (page == index_payload):
+                         payload = payloads[index_payload]
+                         last_key = list(payload.keys())[-1]
+                         for i in list(terms[page]):
+                              payload[last_key] = i
+                              html = (requests.post(url, data = payload)).text
+                              soup = BeautifulSoup(html, 'html.parser')
+                              table = soup.find_all(class_ = "table-responsive")
+                              print(table)
+
+table()
 
 
 
