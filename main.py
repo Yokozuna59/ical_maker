@@ -1,31 +1,88 @@
 # import modules
-from os import replace
 import sys
 import requests
 import ast
-from bs4 import BeautifulSoup, element
+from bs4 import BeautifulSoup
 import json
 
 
-def get_argv():
-     if (len(sys.argv) != 1):
-          next_main = sys.argv[1::]
-          argv = []
-          for i in next_main:
-               argv.append(i)
+def get_argvs():
+     argvs = []
+     argv_length = len(sys.argv)
+
+     if (argv_length != 1):
+          argv = sys.argv[1::]
+          for i in argv:
+               argvs.append(i)
      else:
-          argv = None
-     return argv
-argv = get_argv()
+          argvs = None
+     argvs.sort(reverse=True)
+     return argvs
+argvs = get_argvs()
+
+
+#def get_argvs():
+#     argvs = []
+#     argv_length = len(sys.argv)
+#
+#     if (argv_length != 1):
+#          argv = sys.argv[1::]
+#          for i in argv:
+#               argvs.append(i)
+#     else:
+#          argvs = None
+#     argvs.sort(reverse=True)
+#     return argvs
+#argvs = get_argvs()
+
+#def lists():
+#     def get_urls():
+#          urls = ["https://registrar.kfupm.edu.sa/CurrentAcadYear", "https://registrar.kfupm.edu.sa/PastAcadYear"]
+#          return urls
+#
+#     def replacement():
+#          replace_from = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "."]
+#          replace_to = ["01/", "02/", "03/", "04/", "05/", "06/", "07/", "08/", "09/", "10/", "11/", "12/", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+#         return replace_from, replace_to
+#
+#     def days_month():
+#          days_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
+#          return days_month
+#
+#     return get_urls(), replacement(), days_month()
+
+# def get_payloads():
+#      def current():
+#           current_acad = ast.literal_eval(open("payloads/current/acad.json").read())
+#           current_prep = ast.literal_eval(open("payloads/current/prep.json").read())
+#           return current_acad, current_prep
+
+#      def past():
+#           past_acad = ast.literal_eval(open("payloads/past/acad.json").read())
+#           past_prep = ast.literal_eval(open("payloads/past/prep.json").read())
+#           return past_acad, past_prep
+
+#      return current(), past()
+# payloads = get_payloads()
+
+
 
 def get_urls():
      urls = ["https://registrar.kfupm.edu.sa/CurrentAcadYear", "https://registrar.kfupm.edu.sa/PastAcadYear"]
      return urls
 urls = get_urls()
 
+
+def replacement(i):
+     replace_from = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "."]
+     replace_to = ["01/", "02/", "03/", "04/", "05/", "06/", "07/", "08/", "09/", "10/", "11/", "12/", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+     return replace_from[i], replace_to[i]
+
+
 def days_month(month):
      days_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
      return days_month[month]
+
 
 def get_payloads():
      current_acad = ast.literal_eval(open("payloads/current/acad.json").read())
@@ -48,11 +105,13 @@ def get_terms():
                html = (requests.post(url, data=payload)).text
                soup = BeautifulSoup(html, 'html.parser')
                options = soup.find_all('option')
+               print(options)
 
                for option in options:
                     value = option["value"]
-                    if (argv != None):
-                         for i in argv:
+                    print(value)
+                    if (argvs != None):
+                         for i in argvs:
                               if (value.find(i) != -1):
                                    if (value.find("0") != 0):
                                         if (url.find("Current") != -1):
@@ -135,12 +194,6 @@ def get_global_terms():
 global_terms = get_global_terms()
 
 
-def replacement(i):
-     replace_from = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-     replace_to = ["01/", "02/", "03/", "04/", "05/", "06/", "07/", "08/", "09/", "10/", "11/", "12/", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-     return replace_from[i], replace_to[i]
-
-
 def row():
      for table in tables:
           soup = BeautifulSoup(str(table), 'html.parser')
@@ -167,6 +220,7 @@ def row():
                               row = 2
                          full_date = " ".join(((rows[row].text).lower()).split())
                          event = " ".join(((rows[row + 1].text).lower()).split())
+                         print(full_date + ", " + event)
 
                          # use the current index and replace word from the replacement lists
                          for i in range(38):
@@ -203,10 +257,14 @@ def row():
                                    else:
                                         full_date = "".join(year + full_date)
 
+                              continue
+
                               if (((full_date.find("-") != -1) or (event.find("resume") != -1))):
-                                   print(full_date.replace("/", " ").replace("-", " ").split()[::-1])
-                                   split_by_slash = (full_date[4::].replace("/", " ").replace("-", " ").split()[::-1])
-                                   print(split_by_slash)
+                                   if (len(full_date.replace("/", " ").replace("-", " ").split()) == 3):
+                                        split_by_slash = (full_date[3::].replace("/", " ").replace("-", " ").split()[::-1])
+
+                                   else:
+                                        split_by_slash = (full_date[4::].replace("/", " ").replace("-", " ").split()[::-1])
                                    if (len(split_by_slash) == 2):
                                         before_resume = (needed_events[-1].split(", "))
                                         day_before_resume = before_resume[0][6::]
