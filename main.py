@@ -117,8 +117,7 @@ def get_tables():
 tables = get_tables()
 
 
-def get_global_terms():
-
+def terms_dict():
      global_terms = {}
 
      for table in tables:
@@ -132,18 +131,17 @@ def get_global_terms():
                keys = list(global_terms.keys())
                if ((len(keys)) == 0):
                     global_terms[term] = {}
-               for i in (keys):
+               for i in keys:
                     if (term.find(i) != -1):
                          continue
                     else:
                          global_terms[term] = {}
-               term_acad = global_terms[term]
-               term_acad["ACAD"] = {"INCLUDE":{},"EXCLUDE":{}}
+               global_terms[term]["ACAD"] = {}
                if (len(elements) == 3):
-                    term_acad["PREP"] = {"FIRST":{"INCLUDE":{},"EXCLUDE":{}},"SECOND":{"INCLUDE":{},"EXCLUDE":{}}}
+                    global_terms[term]["PREP"] = {"FIRST":{},"SECOND":{}}
 
      return global_terms
-global_terms = get_global_terms()
+terms_dictionary = terms_dict()
 
 
 def row():
