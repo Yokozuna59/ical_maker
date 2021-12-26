@@ -48,48 +48,51 @@ def get_payloads():
 payloads = get_payloads()
 
 
-def get_terms():
-     current_acad_terms = []
-     current_prep_terms = []
-     past_acad_terms = []
-     past_prep_terms = []
+def get_terms(index):
+     current_acad = []
+     current_prep = []
+     past_acad = []
+     past_prep = []
 
-     for url in urls:
+     for i in (0,1):
+          url = get_urls(i)
+          payloads = get_payloads(i)
+
           for payload in payloads:
                html = (requests.post(url, data=payload)).text
                soup = BeautifulSoup(html, 'html.parser')
-               options = soup.find_all('option')
+               options = soup.find_all('option')[1::]
 
                for option in options:
                     value = option["value"]
                     if (argvs != None):
-                         for i in argvs:
-                              if (value.find(i) != -1):
-                                   if (value.find("0") != 0):
-                                        if (url.find("Current") != -1):
-                                             if (option.text.find("Prep") != -1):
-                                                  current_prep_terms.append(value)
-                                             else:
-                                                  current_acad_terms.append(value)
-                                        elif (url.find("Past") != -1):
-                                             if (option.text.find("Prep") != -1):
-                                                  past_prep_terms.append(value)
-                                             else:
-                                                  past_acad_terms.append(value)
+                         for argv in argvs:
+                              if (value.find(argv) != -1):
+                                   if (url.find("Current") != -1):
+                                        if (option.text.find("Prep") != -1):
+                                             current_prep.append(value)
+                                        else:
+                                             current_acad.append(value)
+                                   else:
+                                        if (option.text.find("Prep") != -1):
+                                             past_prep.append(value)
+                                        else:
+                                             past_acad.append(value)
                     else:
-                         if (value.find("0") != 0):
-                              if (url.find("Current") != -1):
-                                   if (option.text.find("Prep") != -1):
-                                        current_prep_terms.append(value)
-                                   else:
-                                        current_acad_terms.append(value)
-                              elif (url.find("Past") != -1):
-                                   if (option.text.find("Prep") != -1):
-                                        past_prep_terms.append(value)
-                                   else:
-                                        past_acad_terms.append(value)
-     return current_acad_terms, current_prep_terms, past_acad_terms, past_prep_terms
-terms = get_terms()
+                         if (url.find("Current") != -1):
+                              if (option.text.find("Prep") != -1):
+                                   current_prep.append(value)
+                              else:
+                                   current_acad.append(value)
+                         else:
+                              if (option.text.find("Prep") != -1):
+                                   past_prep.append(value)
+                              else:
+                                   past_acad.append(value)
+     if (index == 0):
+          return current_acad, current_prep
+     else:
+          return past_acad, past_prep
 
 
 def get_tables():
@@ -99,6 +102,7 @@ def get_tables():
           url = get_urls(i)
           payloads = get_payloads(i)
           terms = get_terms(i)
+
           for j in (0,1):
                payload = payloads[j]
                term = terms[j]
