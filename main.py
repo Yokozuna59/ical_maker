@@ -14,57 +14,11 @@ def get_argvs():
           argv = sys.argv[1::]
           for i in argv:
                argvs.append(i)
+          argvs.sort(reverse=True)
      else:
           argvs = None
-     argvs.sort(reverse=True)
      return argvs
 argvs = get_argvs()
-
-
-#def get_argvs():
-#     argvs = []
-#     argv_length = len(sys.argv)
-#
-#     if (argv_length != 1):
-#          argv = sys.argv[1::]
-#          for i in argv:
-#               argvs.append(i)
-#     else:
-#          argvs = None
-#     argvs.sort(reverse=True)
-#     return argvs
-#argvs = get_argvs()
-
-#def lists():
-#     def get_urls():
-#          urls = ["https://registrar.kfupm.edu.sa/CurrentAcadYear", "https://registrar.kfupm.edu.sa/PastAcadYear"]
-#          return urls
-#
-#     def replacement():
-#          replace_from = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "."]
-#          replace_to = ["01/", "02/", "03/", "04/", "05/", "06/", "07/", "08/", "09/", "10/", "11/", "12/", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-#         return replace_from, replace_to
-#
-#     def days_month():
-#          days_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
-#          return days_month
-#
-#     return get_urls(), replacement(), days_month()
-
-# def get_payloads():
-#      def current():
-#           current_acad = ast.literal_eval(open("payloads/current/acad.json").read())
-#           current_prep = ast.literal_eval(open("payloads/current/prep.json").read())
-#           return current_acad, current_prep
-
-#      def past():
-#           past_acad = ast.literal_eval(open("payloads/past/acad.json").read())
-#           past_prep = ast.literal_eval(open("payloads/past/prep.json").read())
-#           return past_acad, past_prep
-
-#      return current(), past()
-# payloads = get_payloads()
-
 
 
 def get_urls():
@@ -105,11 +59,9 @@ def get_terms():
                html = (requests.post(url, data=payload)).text
                soup = BeautifulSoup(html, 'html.parser')
                options = soup.find_all('option')
-               print(options)
 
                for option in options:
                     value = option["value"]
-                    print(value)
                     if (argvs != None):
                          for i in argvs:
                               if (value.find(i) != -1):
@@ -143,24 +95,20 @@ terms = get_terms()
 def get_tables():
      tables = []
 
-     for url in urls:
-          for index_payload in range(len(payloads)):
-               for page in range(len(terms)):
-                    if (url.find("Current") != -1):
-                         if (page >= 2):
-                              break
-                    elif (url.find("Past") != -1):
-                         if (index_payload < 2):
-                              continue
-                    if (page == index_payload):
-                         payload = payloads[index_payload]
-                         last_key = list(payload.keys())[-1]
-                         for i in list(terms[page]):
-                              payload[last_key] = i
-                              html = (requests.post(url, data = payload)).text
-                              soup = BeautifulSoup(html, 'html.parser')
-                              table = soup.find_all(class_ = "table-responsive")
-                              tables.append(table)
+     for i in (0,1):
+          url = get_urls(i)
+          payloads = get_payloads(i)
+          terms = get_terms(i)
+          for j in (0,1):
+               payload = payloads[j]
+               term = terms[j]
+               last_key = list(payload.keys())[-1]
+               for i in term:
+                    payload[last_key] = i
+                    html = (requests.post(url, data = payload)).text
+                    soup = BeautifulSoup(html, 'html.parser')
+                    table = soup.find_all(class_ = "table-responsive")
+                    tables.append(table)
      return tables
 tables = get_tables()
 
