@@ -59,9 +59,16 @@ replace = replacement()
 
 
 def days_month():
+     months = ["JAN", "FAB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
      days_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
-     return days_month
-month_index = days_month()
+     return months, days_month
+month = days_month()
+
+
+def week():
+     week = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+     return week
+days_weeks = week()
 
 
 def get_terms(index):
@@ -245,7 +252,7 @@ def full_dates():
                          full_date = " ".join(full_date.replace("%s" %year, "").split())
                          if (full_date[-1].find("-") != -1):
                               full_date = full_date.replace("-", " ")
-                         elif (len(full_date) == 6):
+                         elif (len(full_date) == 5 or len(full_date) == 6):
                               full_date = full_date.replace("-", " ")
 
                          splitted_full_date = " ".join(full_date.replace("-", " - ").split()).split(" - ")
@@ -275,6 +282,80 @@ def full_dates():
                     TABLE.append(full_date + ", " + event)
                dictionary["TABLE"] = TABLE
 full_dates()
+
+
+def tt():
+     for terms in terms_dictionary:
+          term = terms_dictionary[terms]
+          for acad_prep in term:
+               table = term[acad_prep]["TABLE"]
+               del term[acad_prep]["TABLE"]
+
+               dictionary = terms_dictionary[terms][acad_prep]
+               NORMAL = []
+               INCLUDE = []
+               EXCLUDE = []
+               for date_event in table:
+                    splitted = date_event.split(", ")
+                    full_date = splitted[0]
+                    event = splitted[1]
+
+                    splitted_full_date = full_date.split(" - ")
+                    if (event.find("last day before") != -1) or (event.find("exams preparation break") != -1):
+                         continue
+                    elif (len(splitted_full_date) == 1):
+                         full_month = full_date.split()[1]
+                         if (len(full_month) == 3):
+                              index = str(int(month[0].index(full_month)) + 1)
+                              full_date = full_date.replace(full_month, "0%s" %index)
+                              full_date = "".join(full_date.split()[::-1])
+
+                         if ((event.find("classes begin") != -1) or (event.find("last day of classes") != -1) or (event.find("normal") != -1)):
+                              INCLUDE.append(full_date)
+                              if (event.find("normal") != -1):
+                                   EXCLUDE.append(full_date)
+                                   for i in days_weeks:
+                                        if (event.find(i) != -1):
+                                             NORMAL.append(full_date + ":" + i.upper())
+                         elif (event.find("resume") != -1):
+                              print(date_event)
+                         elif ((event.find("holiday") != -1) or (event.find("break") != -1)):
+                              EXCLUDE.append(full_date)
+                    else:
+                         if ((event.find("holiday") != -1) or (event.find("break") != -1)):
+                              first_element = splitted_full_date[0]
+                              second_element = splitted_full_date[1]
+                              if (len(first_element) == 2):
+                                   full_month = full_date.split()[3]
+                                   index = str(int(month[0].index(full_month)) + 1)
+                                   full_date = full_date.replace(full_month, "0%s" %index)
+                                   full_date = "".join((full_date.split()[2::])[::-1])
+                                   for i in range(int(first_element), int(second_element[0:2]) + 1):
+                                        i = str(i)
+                                        if (len(i) == 1):
+                                             i = "0" + i
+                                        EXCLUDE.append(full_date + i)
+                              elif (len(first_element) == 6):
+                                   pass
+                              elif (len(first_element) == 11):
+                                   pass
+                              print(splitted_full_date)
+
+
+
+               print(EXCLUDE)
+               print(INCLUDE)
+               print(NORMAL)
+               print()
+tt()
+
+
+
+
+
+
+
+
 
 
 def row():
