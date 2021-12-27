@@ -196,13 +196,16 @@ get_dates_events()
 
 
 def full_dates():
-     for dictionary in terms_dictionary:
-          term = terms_dictionary[dictionary]
+     for terms in terms_dictionary:
+          term = terms_dictionary[terms]
           for acad_prep in term:
                first_line = False
                table = term[acad_prep]["TABLE"]
                del term[acad_prep]["TABLE"]
 
+               dictionary = terms_dictionary[terms][acad_prep]
+
+               TABLE = []
                for date_event in table:
                     splitted = date_event.split(", ")
                     full_date = splitted[0]
@@ -242,8 +245,8 @@ def full_dates():
                          full_date = " ".join(full_date.replace("%s" %year, "").split())
                          if (full_date[-1].find("-") != -1):
                               full_date = full_date.replace("-", " ")
-                         elif (len(full_date) == 8 or len(full_date) == 7):
-                              full_date = full_date.replace(" - ", " ")
+                         elif (len(full_date) == 6):
+                              full_date = full_date.replace("-", " ")
 
                          splitted_full_date = " ".join(full_date.replace("-", " - ").split()).split(" - ")
                          if (len(splitted_full_date) != 1):
@@ -269,8 +272,8 @@ def full_dates():
 
                     if (len(full_date) == 10):
                          full_date = "0" + full_date
-                    print(full_date + ", " + event)
-
+                    TABLE.append(full_date + ", " + event)
+               dictionary["TABLE"] = TABLE
 full_dates()
 
 
