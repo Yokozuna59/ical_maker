@@ -1,4 +1,3 @@
-# import modules
 import sys
 import requests
 import ast
@@ -6,46 +5,63 @@ from bs4 import BeautifulSoup
 import json
 
 
-def get_argvs():
+def get_arguments():
      argvs = []
-     argv_length = len(sys.argv)
 
-     if (argv_length != 1):
-          argv = sys.argv[1::]
-          for i in argv:
+     if (len(sys.argv) != 1):
+          argv_list = sys.argv[1::]
+          for i in argv_list:
                argvs.append(i)
           argvs.sort(reverse=True)
      else:
           argvs = None
      return argvs
-argvs = get_argvs()
+argvs = get_arguments()
 
 
-def get_urls():
-     urls = ["https://registrar.kfupm.edu.sa/CurrentAcadYear", "https://registrar.kfupm.edu.sa/PastAcadYear"]
-     return urls
-urls = get_urls()
+def get_urls(index):
+     def current():
+          url = "https://registrar.kfupm.edu.sa/CurrentAcadYear"
+          return url
+
+     def past():
+          url = "https://registrar.kfupm.edu.sa/PastAcadYear"
+          return url
+
+     if (index == 0):
+          return current()
+     else:
+          return past()
 
 
-def replacement(i):
+def get_payloads(index):
+     def current():
+          current_acad = ast.literal_eval(open("payloads/current/acad.json").read())
+          current_prep = ast.literal_eval(open("payloads/current/prep.json").read())
+          return current_acad, current_prep
+
+     def past():
+          past_acad = ast.literal_eval(open("payloads/past/acad.json").read())
+          past_prep = ast.literal_eval(open("payloads/past/prep.json").read())
+          return past_acad, past_prep
+
+     if (index == 0):
+          return current()
+     else:
+          return past()
+
+
+def replacement():
      replace_from = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "."]
-     replace_to = ["01/", "02/", "03/", "04/", "05/", "06/", "07/", "08/", "09/", "10/", "11/", "12/", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-     return replace_from[i], replace_to[i]
+     replace_to = ["JAN", "FAB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+     return replace_from, replace_to
+replace = replacement()
 
 
-def days_month(month):
+def days_month():
      days_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
-     return days_month[month]
-
-
-def get_payloads():
-     current_acad = ast.literal_eval(open("payloads/current/acad.json").read())
-     current_prep = ast.literal_eval(open("payloads/current/prep.json").read())
-
-     past_acad = ast.literal_eval(open("payloads/past/acad.json").read())
-     past_prep = ast.literal_eval(open("payloads/past/prep.json").read())
-     return current_acad, current_prep, past_acad, past_prep
-payloads = get_payloads()
+     return days_month
+month_index = days_month()
 
 
 def get_terms(index):
@@ -142,6 +158,94 @@ def terms_dict():
 
      return global_terms
 terms_dictionary = terms_dict()
+
+
+def get_dates_events():
+     for table in tables:
+          TABLE = []
+
+          soup = BeautifulSoup(str(table), 'html.parser')
+          href = soup.find("a").get("href")
+          href_term = href.replace("_", "/").replace(".", "/").split("/")
+          elements = href_term[4:len(href_term)-1]
+          term = elements[0][2:5]
+
+          if (len(elements) != 3):
+               dictionary = terms_dictionary[term]["ACAD"]
+          else:
+               dictionary = terms_dictionary[term]["PREP"]
+
+          for half in table:
+               soup = BeautifulSoup(str(half), 'html.parser')
+               if (len(soup.text) != 4):
+                    columns = soup.find_all("tr")[1::]
+
+                    for column in columns:
+                         rows = column.find_all('td')
+
+                         if (len(rows) == 4):
+                              row = 2
+                         else:
+                              row = 3
+
+                         full_date = " ".join(((rows[row].text).lower()).split())
+                         event = " ".join(((rows[row + 1].text).lower()).split())
+                         TABLE.append(full_date + ", " + event)
+          dictionary["TABLE"] = TABLE
+get_dates_events()
+
+
+def dates():
+     for dictionary in terms_dictionary:
+          term = terms_dictionary[dictionary]
+          for acad_prep in term:
+               first_line = False
+               table = term[acad_prep]["TABLE"]
+               del term[acad_prep]["TABLE"]
+
+               for date_event in table:
+                    splitted = date_event.split(", ")
+                    full_date = splitted[0]
+                    event = splitted[1]
+
+                    for i in range(39):
+                         full_date = full_date.replace(str(replace[0][i]), str(replace[1][i]))
+
+                    splitted_full_date = full_date.replace("'", " ").replace("-", " ").split()
+                    if (first_line == False):
+                         year = splitted_full_date[-1]
+                         if (len(year) == 2):
+                              year = "20" + year
+                         next_year = str(int(year) + 1)
+                         first_line = True
+                    elif (full_date.find(next_year) != -1):
+                         year = next_year
+
+                    if ((full_date.find("DEC") != -1) and (full_date.find("JAN") != -1)):
+                         dates = []
+                         splitted_full_date = full_date.split("-")
+
+                         for i in splitted_full_date:
+                              splitted = i.split("'")
+                              if (len(splitted) == 1):
+                                   dates.append(splitted[0])
+                                   if (len(dates) == 2):
+                                        if (len(dates[1]) == 10):
+                                             full_date = "0" + dates[1]
+                                        else:
+                                             full_date = dates[1]
+                                        year = str(int(full_date[7:11]) - 1)
+                                        dates[0] = dates[0] + " " + year
+                              else:
+                                   dates.append(" ".join(splitted[0].split()) + " 20" + splitted[1])
+
+                         full_date = " - ".join(dates)
+                         print(full_date + ", " + event)
+                    elif (full_date.find(year) != -1):
+                         print(full_date + ", " + event)
+                    else:
+                         print(full_date + " " + year + ", " + event)
+dates()
 
 
 def row():
@@ -271,9 +375,9 @@ def row():
                               else:
                                    full_date = full_date.replace("/", "")
                                    needed_events.append(full_date + ", " + event)
-               print(needed_events)
+               # print(needed_events)
 
-row()
+# row()
 
 
 
