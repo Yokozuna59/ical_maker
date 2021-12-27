@@ -195,7 +195,7 @@ def get_dates_events():
 get_dates_events()
 
 
-def dates():
+def full_dates():
      for dictionary in terms_dictionary:
           term = terms_dictionary[dictionary]
           for acad_prep in term:
@@ -211,8 +211,8 @@ def dates():
                     for i in range(39):
                          full_date = full_date.replace(str(replace[0][i]), str(replace[1][i]))
 
-                    splitted_full_date = full_date.replace("'", " ").replace("-", " ").split()
                     if (first_line == False):
+                         splitted_full_date = full_date.replace("'", " ").replace("-", " ").split()
                          year = splitted_full_date[-1]
                          if (len(year) == 2):
                               year = "20" + year
@@ -221,31 +221,57 @@ def dates():
                     elif (full_date.find(next_year) != -1):
                          year = next_year
 
+                    dates = []
                     if ((full_date.find("DEC") != -1) and (full_date.find("JAN") != -1)):
-                         dates = []
-                         splitted_full_date = full_date.split("-")
-
+                         splitted_full_date = " ".join(full_date.replace("-", " - ").split()).split(" - ")
                          for i in splitted_full_date:
+                              if (len(i) == 10):
+                                   i = "0" + i
                               splitted = i.split("'")
                               if (len(splitted) == 1):
                                    dates.append(splitted[0])
                                    if (len(dates) == 2):
-                                        if (len(dates[1]) == 10):
-                                             full_date = "0" + dates[1]
-                                        else:
-                                             full_date = dates[1]
+                                        full_date = dates[1]
                                         year = str(int(full_date[7:11]) - 1)
                                         dates[0] = dates[0] + " " + year
                               else:
-                                   dates.append(" ".join(splitted[0].split()) + " 20" + splitted[1])
+                                   dates.append(splitted[0] + " 20" + splitted[1])
 
                          full_date = " - ".join(dates)
-                         print(full_date + ", " + event)
                     elif (full_date.find(year) != -1):
-                         print(full_date + ", " + event)
+                         full_date = " ".join(full_date.replace("%s" %year, "").split())
+                         if (full_date[-1].find("-") != -1):
+                              full_date = full_date.replace("-", " ")
+                         elif (len(full_date) == 8 or len(full_date) == 7):
+                              full_date = full_date.replace(" - ", " ")
+
+                         splitted_full_date = " ".join(full_date.replace("-", " - ").split()).split(" - ")
+                         if (len(splitted_full_date) != 1):
+                              for i in splitted_full_date:
+                                   if ((len(i) == 1) or len(i) == 5):
+                                        i = "0" + i
+                                   dates.append(i)
+
+                              full_date = " - ".join(dates)
+                         full_date = " ".join(full_date.split()) + " " + year
                     else:
-                         print(full_date + " " + year + ", " + event)
-dates()
+                         splitted_full_date = " ".join(full_date.replace("-", " - ").split()).split(" - ")
+                         if (len(splitted_full_date) != 1):
+                              for i in splitted_full_date:
+                                   if ((len(i) == 1) or len(i) == 5):
+                                        i = "0" + i
+                                   dates.append(i)
+
+                              full_date = " - ".join(dates)
+                              if (len(i) == 3):
+                                   full_date = full_date.replace(" - ", " ")
+                         full_date = " ".join(full_date.split()) + " " + year
+
+                    if (len(full_date) == 10):
+                         full_date = "0" + full_date
+                    print(full_date + ", " + event)
+
+full_dates()
 
 
 def row():
