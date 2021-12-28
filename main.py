@@ -14,7 +14,7 @@ def get_arguments():
                argv_list.append(argv)
           argvs.sort(reverse=True)
      else:
-          argv_list = ["2021"]
+          argv_list = None
 
      return argv_list
 
@@ -136,10 +136,10 @@ def get_tables():
 
           for j in (0,1):
                payload = payloads[j]
-               page_term = terms[j]
+               page_terms = terms[j]
                last_key = list(payload.keys())[-1]
 
-               for term in page_term:
+               for term in page_terms:
                     payload[last_key] = term
                     html = (requests.post(url, data = payload)).text
                     soup = BeautifulSoup(html, 'html.parser')
@@ -247,8 +247,9 @@ def full_dates():
                               prep = True
                          else:
                               index = 1
+                         half = halfs[index]
 
-                         dictionary = terms_dictionary[term]["PREP"][halfs[index]]
+                         dictionary = terms_dictionary[term]["PREP"][half]
 
 
                     for date_event in table:
@@ -327,279 +328,171 @@ full_dates()
 
 
 def main():
-     for terms in terms_dictionary:
-          term = terms_dictionary[terms]
-          for acad_prep in term:
-               table = term[acad_prep]["TABLE"]
-               del term[acad_prep]["TABLE"]
+     for term in terms_dictionary:
+          term_path = terms_dictionary[term]
 
-               dictionary = terms_dictionary[terms][acad_prep]
-               NORMAL = []
-               INCLUDE = []
-               EXCLUDE = []
-               for date_event in table:
-                    splitted = date_event.split(", ")
-                    full_date = splitted[0]
-                    event = splitted[1]
+          for acad_prep in term_path:
+               tables = []
 
-                    splitted_full_date = full_date.split(" - ")
-                    if (event.find("last day before") != -1) or (event.find("exams preparation break") != -1):
-                         continue
-                    elif (len(splitted_full_date) == 1):
-                         full_month = full_date.split()[1]
-                         if (len(full_month) == 3):
-                              index = str(int(month[0].index(full_month)) + 1)
-                              full_date = full_date.replace(full_month, "0%s" %index)
-                              full_date = "".join(full_date.split()[::-1])
+               if (acad_prep.find("ACAD") != -1):
+                    tables.append(term_path[acad_prep]["TABLE"])
+                    del term_path[acad_prep]["TABLE"]
+               elif (acad_prep.find("PREP") != -1):
+                    prep = False
+                    for i in (0,1):
+                         dictionary = terms_dictionary[term]["PREP"][halfs[i]]
+                         tables.append(terms_dictionary[term]["PREP"][halfs[i]])
 
-                         if ((event.find("classes begin") != -1) or (event.find("last day of classes") != -1) or (event.find("normal") != -1)):
-                              INCLUDE.append(full_date)
-                              if (event.find("normal") != -1):
+               dictionary = terms_dictionary[term][acad_prep]
+               for table in tables:
+                    if (acad_prep.find("PREP") != -1):
+                         table = table["TABLE"]
+                         if (prep == False):
+                              index = 0
+                              prep = True
+                         else:
+                              index = 1
+                         half = halfs[index]
+
+                         dictionary = terms_dictionary[term]["PREP"][half]
+                         del terms_dictionary[term]["PREP"][half]["TABLE"]
+
+                    START = []
+                    END = []
+                    NORMAL = []
+                    EXCLUDE = []
+
+                    for date_event in table:
+                         splitted = date_event.split(", ")
+                         full_date = splitted[0]
+                         event = splitted[1]
+
+                         splitted_full_date = full_date.split(" - ")
+                         if (event.find("before") != -1) or (event.find("exams preparation break") != -1):
+                              full_month = full_date.split()[1]
+                              if (len(full_month) == 3):
+                                   index = str(int(days[1].index(full_month)) + 1)
+                                   if (len(index) == 1):
+                                        index = "0" + index
+                                   full_date = full_date.replace(full_month, "%s" %index)
+                                   full_date = "".join(full_date.split()[::-1])
+
+                              if (event.find("last") != -1):
+                                   full_date = str(int(full_date) + 1)
                                    EXCLUDE.append(full_date)
-                                   for i in days_weeks:
+
+                         elif (len(splitted_full_date) == 1):
+                              full_month = full_date.split()[1]
+                              if (len(full_month) == 3):
+                                   index = str(int(days[1].index(full_month)) + 1)
+                                   if (len(index) == 1):
+                                        index = "0" + index
+                                   full_date = full_date.replace(full_month, "%s" %index)
+                                   full_date = "".join(full_date.split()[::-1])
+
+                              if (event.find("classes begin") != -1):
+                                   START.append(full_date)
+                              elif (event.find("last day of classes") != -1):
+                                   END.append(full_date)
+                                   if (event.find("normal") != -1):
+                                        EXCLUDE.append(full_date)
+                                        for i in days[0]:
+                                             if (event.find(i) != -1):
+                                                  NORMAL.append(full_date + ":" + i.upper())
+                              elif (event.find("normal") != -1):
+                                   EXCLUDE.append(full_date)
+                                   for i in days[0]:
                                         if (event.find(i) != -1):
                                              NORMAL.append(full_date + ":" + i.upper())
-                         elif (event.find("resume") != -1):
-                              print(date_event)
-                         elif ((event.find("holiday") != -1) or (event.find("break") != -1)):
-                              EXCLUDE.append(full_date)
-                    else:
-                         if ((event.find("holiday") != -1) or (event.find("break") != -1)):
-                              first_element = splitted_full_date[0]
-                              second_element = splitted_full_date[1]
-                              if (len(first_element) == 2):
-                                   full_month = full_date.split()[3]
-                                   index = str(int(month[0].index(full_month)) + 1)
-                                   full_date = full_date.replace(full_month, "0%s" %index)
-                                   full_date = "".join((full_date.split()[2::])[::-1])
-                                   for i in range(int(first_element), int(second_element[0:2]) + 1):
-                                        i = str(i)
-                                        if (len(i) == 1):
-                                             i = "0" + i
-                                        EXCLUDE.append(full_date + i)
-                              elif (len(first_element) == 6):
-                                   pass
-                              elif (len(first_element) == 11):
-                                   pass
-                              print(splitted_full_date)
+                              elif (event.find("resume") != -1):
+                                   exclude_date = EXCLUDE[-1]
+                                   resume_date = full_date
 
+                                   if (exclude_date[4:6] == resume_date[4:6]):
+                                        full_date = full_date[0:6]
+                                        for i in range(int(exclude_date[6::]) + 1, int(resume_date[6::])):
+                                             i = str(i)
+                                             if (len(i) == 1):
+                                                  i = "0" + i
+                                             EXCLUDE.append(full_date + i)
+                                   else:
+                                        year = full_date.replace(" ", "")[0:4]
 
-
-               print(EXCLUDE)
-               print(INCLUDE)
-               print(NORMAL)
-               print()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def main2():
-     url = ("https://registrar.kfupm.edu.sa/currentacadyear")
-
-     # create lists
-     halfs = ["FIRST", "SECOND"] # list for the "FIRST" and "SECOND" halfs
-
-     # create two lists for the replacement loop
-     replace_from = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-     replace_to = ["01/", "02/", "03/", "04/", "05/", "06/", "07/", "08/", "09/", "10/", "11/", "12/", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-
-     academic_prep = ["ACAD", "PREP"] # list for the "ACAD" and "PREP" years
-
-     days_of_month = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
-
-     include_exlucde = ["INCLUDE", "EXCLUDE"] # list for the "INCLUDE" and "EXCLUDE" dates
-
-     # open and read the "payloads.txt" file then split split it by "~~~"
-     payloads = open("payloads.txt", "r").read()
-     splitted_payloads = payloads.split("~~~")
-
-     # for loop with "Academic" and "Prep" years payloads
-     for i in range(len(splitted_payloads)):
-          # create a list to add the terms from registrar page
-          registrar_terms = []
-
-          # get the element and convert it to dictionary then post the request and scrap the page
-          payload = ast.literal_eval(splitted_payloads[i])
-          html = (requests.post(url, data = payload)).text
-          soup = BeautifulSoup(html, 'html.parser')
-
-          # get the options of terms and add it to the list
-          options_of_terms = soup.find_all('option')
-          for j in options_of_terms:
-               if (j["value"].find("0") != 0):
-                    registrar_terms.append(j["value"])
-
-          # for loop with terms from registrar
-          for j in registrar_terms:
-               # get the last key from payload then assign new value for it and scrap the page
-               last_key = list(payload.keys())[-1]
-               payload[last_key] = j
-               html = (requests.post(url, data = payload)).text
-               soup = BeautifulSoup(html, 'html.parser')
-
-               # get all classes with "table-responsive" then use it in for loop
-               table = soup.find_all(class_ = "table-responsive")
-               for k in range(len(table)):
-                    # ignore the empty table
-                    if (len(table[k].text) != 4):
-                         # create a bool variable to check if the first line have been checked yet or not
-                         first_line = False
-
-                         # create empty lists to the included and excluded dates
-                         needed_events = []
-                         excluded_dates = []
-                         included_dates = []
-
-                         # create the short name term variable, e.g. "211"
-                         short_term = j[2:5]
-
-                         # creat a full term variable
-                         term = academic_prep[i] + short_term
-
-                         # check if i is 0 == ACAD, 1 == PREP
-                         if (i == 1):
-                              term += halfs[k]
-
-                         # get the table's columns and use it in the for loop
-                         columns = table[k].find_all("tr")
-                         for k in columns:
-                              # get the column rows and get the needed ones
-                              rows = k.find_all('td')
-
-                              # ignore the empty row
-                              if (len(rows) != 0):
-                                   # get the full date and event then make them lowercase then remove double space
-                                   full_date = " ".join(((rows[3].text).lower()).split())
-                                   event = " ".join(((rows[4].text).lower()).split())
-
-                                   # use the current index and replace word from the replacement lists
-                                   for k in range(len(replace_from)):
-                                        full_date = full_date.replace(replace_from[k], replace_to[k])
-
-                                   # check the first line bool statement
-                                   if (first_line == False):
-                                        splitted_full_date = full_date.split()
-                                        year = splitted_full_date[-1]
-                                        next_year = str(int(year) + 1)
-                                        first_line = True
-                                   elif (full_date.find(next_year) != -1):
-                                        year = next_year
-
-                                   # ignore if the event contains "last day before" and "exams preparation break"
-                                   if (event.find("last day before") != -1) or (event.find("exams preparation break") != -1):
-                                        continue
-                                   # check if the event contains the key words for the needed events
-                                   elif (event.find("classes begin") != -1) or(event.find("holiday") != -1) or (event.find("resume") != -1) or (event.find("break") != -1) or (event.find("normal") != -1) or (event.find("last day of classes") != -1):
-                                        # split full date with spaces
-                                        splitted_full_date = (full_date.replace("-", " - ").split())
-
-                                        # create an empty list to add elements of splitted full date
-                                        dates = []
-
-                                        # get elements from the splitted full date reversed: (YEAR, MONTH, DAY)
-                                        for k in splitted_full_date[::-1]:
-                                             # check if full date contains (year)
-                                             if (year == k):
-                                                  dates.append(k)
+                                        for i in (0,1):
+                                             if (i == 0):
+                                                  day = int(exclude_date[-2:]) + 1
+                                                  month = exclude_date[4:6]
+                                                  index = int(month) - 1
+                                                  last_day = int(days[2][index]) + 1
                                              else:
-                                                  if ((len(k) == 1) and (k != "-")):
-                                                       k = '0' + k
-                                                  dates.append(k)
+                                                  day = 1
+                                                  month = resume_date[4:6]
+                                                  last_day = int(resume_date[-2:])
 
-                                             full_date = "".join(dates)
-                                             if (full_date.find(year) != -1):
-                                                  pass
-                                             else:
-                                                  full_date = "".join(year + full_date)
 
-                                        if ((full_date.find("-") != -1) or event.find("resume") != -1):
-                                             split_by_slash = (" ".join((" ".join(full_date[4::].split("/"))).split("-")).split())[::-1]
-                                             if (len(split_by_slash) == 2):
-                                                  before_resume = (needed_events[-1].split(", "))
-                                                  day_before_resume = before_resume[0][6::]
-                                                  month_before_resume = before_resume[0][4:6]
-                                                  event_before_resume = before_resume[1]
-
-                                                  month = split_by_slash[1]
-                                                  if (month_before_resume == month):
-                                                       for k in range(int(day_before_resume) + 1, int(split_by_slash[0])):
-                                                            k = str(k)
-                                                            if ((len(k) == 1)):
-                                                                 k = '0' + k
-                                                            needed_events.append(full_date[0:6] + k + ", " + event_before_resume)
-                                                  else:
-                                                       for k in (0,1):
-                                                            if (k == 0):
-                                                                 month = month_before_resume
-                                                                 days = day_before_resume
-                                                                 month_days = days_of_month[int(month_before_resume) - 1]
-                                                            else:
-                                                                 month = split_by_slash[1]
-                                                                 days = 1
-                                                                 month_days = split_by_slash[0]
-
-                                                            for k in range(int(days) + 1, int(month_days) + 1):
-                                                                 k = str(k)
-                                                                 if ((len(k) == 1)):
-                                                                      k = '0' + k
-                                                                 needed_events.append(full_date[0:4] + month + k + ", " + event_before_resume)
-                                                  full_date = full_date.replace("/", "")
-                                                  needed_events.append(full_date + ", " + event)
-
-                                             elif len(split_by_slash) == 3:
-                                                  for k in range(int(split_by_slash[0]), int(split_by_slash[1]) + 1):
-                                                       k = str(k)
-                                                       if ((len(k) == 1)):
-                                                            k = '0' + k
-                                                       needed_events.append(full_date[0:6] + k + ", " + event_before_resume)
-                                             elif (len(split_by_slash) == 4):
-                                                  for k in (0,2):
-                                                       month = split_by_slash[k + 1]
-                                                       if (k == 2):
-                                                            days = 1
-                                                            month_days = split_by_slash[k]
-                                                       else:
-                                                            days = split_by_slash[k]
-                                                            month_days = days_of_month[int(month) - 1]
-
-                                                       for k in range(int(days) , int(month_days) + 1):
-                                                            k = str(k)
-                                                            if ((len(k) == 1)):
-                                                                 k = '0' + k
-                                                            needed_events.append(full_date[0:4] + month + k + ", " + event)
-                                        else:
-                                             full_date = full_date.replace("/", "")
-                                             needed_events.append(full_date + ", " + event)
-
-                         for m in needed_events:
-                              if ((m.find("classes begin") != -1) or (m.find("resume") != -1) or (m.find("last day of classes") != -1)):
-                                   included_dates.append(m)
-                              else:
-                                   print
-                                   excluded_dates.append(m)
-
-                         print(term, end=" INCLUDE")
-                         print(" = ", end= "")
-                         print(included_dates)
-                         print(term, end=" EXCLUDE")
-                         print(" = ", end= "")
-                         if (len(excluded_dates) == 0):
-                              print(None)
+                                             for j in range(day, last_day):
+                                                  j = str(j)
+                                                  if (len(j) == 1):
+                                                       j = "0" + j
+                                                  EXCLUDE.append(year + month + j)
+                              elif ((event.find("holiday") != -1) or (event.find("break") != -1) or (event.find("vacation") != -1)):
+                                   EXCLUDE.append(full_date)
                          else:
-                              print(excluded_dates)
+                              if ((event.find("holiday") != -1) or (event.find("break") != -1) or (event.find("vacation") != -1)):
+                                   first_element = splitted_full_date[0]
+                                   second_element = splitted_full_date[1]
 
-# main2()
+                                   if (len(first_element) == 2):
+                                        full_month = full_date.split()[3]
+                                        index = str(int(days[1].index(full_month)) + 1)
+                                        if (len(index) == 1):
+                                             index = "0" + index
+                                        full_date = full_date.replace(full_month, "%s" %index)
+                                        full_date = "".join((full_date.split()[3::])[::-1])
+                                        for i in range(int(first_element), int(second_element[0:2]) + 1):
+                                             i = str(i)
+                                             if (len(i) == 1):
+                                                  i = "0" + i
+                                             EXCLUDE.append(full_date + i)
+                                   elif (len(first_element) == 6):
+                                        first_month = full_date.split()[1]
+                                        second_month = full_date.split()[4]
+
+                                        for i in (first_month, second_month):
+                                             index = str(int(days[1].index(i)) + 1)
+                                             if (len(index) == 1):
+                                                  index = "0" + index
+                                             full_date = full_date.replace(i, "%s" %index)
+                                        year = full_date[-4:]
+                                        dates = full_date.replace(" ", "")[:-4].split("-")
+
+                                        for i in (0,1):
+                                             month_element = dates[i]
+                                             if (i == 0):
+                                                  day = int(month_element[0:2])
+                                                  month = month_element[2::]
+                                                  index = int(month) - 1
+                                                  last_day = int(days[2][index]) + 1
+                                             else:
+                                                  day = 1
+                                                  month = month_element[2::]
+                                                  last_day = int(month_element[0:2]) + 1
+
+
+                                             for j in range(day, last_day):
+                                                  j = str(j)
+                                                  if (len(j) == 1):
+                                                       j = "0" + j
+                                                  EXCLUDE.append(year + month + j)
+                                   # elif (len(first_element) == 11):
+                                   #      print(splitted_full_date)
+
+                    dictionary["START"] = START
+                    dictionary["END"] = END
+                    dictionary["EXCLUDE"] = EXCLUDE
+                    dictionary["NORMAL"] = NORMAL
+
+main()
+
+json_dictionary = json.dumps(terms_dictionary)
+print(json_dictionary)
