@@ -12,6 +12,7 @@ def get_arguments():
 
           for argv in argvs:
                argv_list.append(argv)
+
           argvs.sort(reverse=True)
      else:
           argv_list = None
@@ -449,6 +450,7 @@ def main():
                                              index = "0" + index
                                         full_date = full_date.replace(full_month, "%s" %index)
                                         full_date = "".join((full_date.split()[3::])[::-1])
+
                                         for i in range(int(first_element), int(second_element[0:2]) + 1):
                                              i = str(i)
                                              if (len(i) == 1):
@@ -468,6 +470,7 @@ def main():
 
                                         for i in (0,1):
                                              month_element = dates[i]
+
                                              if (i == 0):
                                                   day = int(month_element[0:2])
                                                   month = month_element[2::]
