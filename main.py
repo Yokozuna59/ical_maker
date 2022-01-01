@@ -6,7 +6,6 @@ import json
 
 dictionary = {}
 
-
 def get_arguments():
      if (len(sys.argv) != 1):
           argv_list = []
@@ -21,7 +20,7 @@ def get_arguments():
      return argv_list
 
 
-def current():
+def get_current():
      url = ("https://registrar.kfupm.edu.sa/CurrentAcadYear")
 
      acad = ast.literal_eval(open("payloads/current/acad.json").read())
@@ -31,7 +30,7 @@ def current():
      return url, payloads
 
 
-def past():
+def get_past():
      url = ("https://registrar.kfupm.edu.sa/PastAcadYear")
 
      acad = ast.literal_eval(open("payloads/past/acad.json").read())
@@ -44,7 +43,10 @@ def past():
 def get_term():
      years = get_arguments()
 
-     for i in (current(), past()):
+     current = get_current()
+     past = get_past()
+
+     for i in (current, past):
           url = i[0]
           payloads = i[1]
 
@@ -57,15 +59,16 @@ def get_term():
                     value = option["value"]
 
                     if (years == None):
-                         get_table(url, payload, value)
+                         get_tables(url, payload, value)
                     else:
                          for year in years:
                               if (value[0:4] == (year)):
-                                   get_table(url, payload, value)
+                                   get_tables(url, payload, value)
 
 
-def get_table(url, payload, value):
+def get_tables(url, payload, value):
      term = value[2:5]
+
      keys = " ".join(list(dictionary.keys()))
 
      if (keys.find(term) != -1):
@@ -80,19 +83,19 @@ def get_table(url, payload, value):
      html = (requests.post(url, data=payload)).content
      soup = BeautifulSoup(html, 'html.parser')
      tables = soup.find_all(class_ = "table-responsive")
-
      get_dates_events(tables, term)
 
 
 def get_dates_events(tables, term):
+     first_line = False
+
      START = []
      END = []
-     NORMAL = []
      EXCLUDE = []
+     NORMAL = []
 
      soup = BeautifulSoup(str(tables[0]), 'html.parser')
      href_pdf = soup.find("a").get("href")
-     first_line = False
 
      if (href_pdf.find("PREP") != -1):
           academic = "PREP"
@@ -101,6 +104,7 @@ def get_dates_events(tables, term):
 
      for table in tables:
           soup = BeautifulSoup(str(table), 'html.parser')
+
           path = dictionary[term][academic]
 
           table_index = tables.index(table)
@@ -109,7 +113,7 @@ def get_dates_events(tables, term):
                continue
           elif ((academic == "PREP")):
                half = get_halfs(table_index)
-               path = dictionary[term][academic][half]
+               path = path[half]
 
           columns = soup.find_all("tr")[1::]
 
@@ -123,10 +127,11 @@ def get_dates_events(tables, term):
 
                date = (" ".join((rows[row].text).split())).lower()
                date = replacement(date)
+
                event = (" ".join((rows[row + 1].text).split())).lower()
 
                if (first_line == False):
-                    first_element = first_column(date)
+                    first_element = do_first_line(date)
                     year = first_element[0]
                     next_year = first_element[1]
 
@@ -135,7 +140,7 @@ def get_dates_events(tables, term):
                     year = next_year
 
                if ((date.find("DEC") != -1) and (date.find("JAN") != -1)):
-                    date = two_years(date)
+                    date = two_years(date, year)
                elif (date.find(year) != -1):
                     date = one_year(date, year)
                else:
@@ -151,8 +156,8 @@ def get_dates_events(tables, term):
           path["NORMAL"] = NORMAL
 
           START = []
-          EXCLUDE= []
-          END= []
+          EXCLUDE = []
+          END = []
           NORMAL = []
 
 
@@ -173,7 +178,7 @@ def replacement(date):
      return date
 
 
-def first_column(date):
+def do_first_line(date):
      date_spliited = date.replace("'", " ").replace("-", " ").split()
      year = date_spliited[-1]
 
@@ -185,22 +190,23 @@ def first_column(date):
      return year, next_year
 
 
-def two_years(date):
+def two_years(date, year):
      dates = []
+
      date_spliited = (" ".join(date.replace("-", " - ").split())).split(" - ")
 
      for i in date_spliited:
           if (len(i) == 10):
                i = "0" + i
+
           splitted = i.split("'")
 
           if (len(splitted) == 1):
                dates.append(splitted[0])
 
-               if (len(dates) == 2):
-                    date = dates[1]
-                    year = str(int(date[7:11]) - 1)
-                    dates[0] = dates[0] + " " + year
+               if (len(dates) == 1):
+                    previous_year = str(int(year) - 1)
+                    dates[0] = dates[0] + " " + previous_year
           else:
                dates.append(splitted[0] + " 20" + splitted[1])
 
@@ -256,6 +262,7 @@ def check_event(date, event, START, EXCLUDE, END, NORMAL):
      if (event.find("before") != -1) or (event.find("exams preparation break") != -1):
           full_month = date.split()[1]
           date = full_months(date, full_month)
+
           if (date != None):
                month = date[4:6]
                before_result = before(date, event, month)
@@ -277,8 +284,7 @@ def check_event(date, event, START, EXCLUDE, END, NORMAL):
                     NORMAL.append(normal_result)
           elif (event.find("resume") != -1):
                resume_date = date
-               resume_result = resume(resume_date, date, EXCLUDE)
-
+               resume(resume_date, date, EXCLUDE)
           elif ((event.find("holiday") != -1) or (event.find("break") != -1) or (event.find("vacation") != -1)):
                EXCLUDE.append(date)
      else:
@@ -319,7 +325,6 @@ def check_event(date, event, START, EXCLUDE, END, NORMAL):
                               month = month_element[0:2]
                               last_day = int(month_element[0:2]) + 1
 
-
                          for j in range(day, last_day):
                               j = str(j)
                               if (len(j) == 1):
@@ -329,6 +334,18 @@ def check_event(date, event, START, EXCLUDE, END, NORMAL):
                     print(date)
 
      return START, END, EXCLUDE, NORMAL
+
+
+def full_months(date, full_month):
+     if (len(full_month) == 3):
+          index = str(int(days[1].index(full_month)) + 1)
+
+          if (len(index) == 1):
+               index = "0" + index
+          date = date.replace(full_month, "%s" %index)
+          date = "".join(date.split()[::-1])
+
+          return date
 
 
 def get_days():
@@ -351,18 +368,6 @@ def before(date, event, month):
                date = date + 1 - day
                date += 100
           date = str(date)
-
-          return date
-
-
-def full_months(date, full_month):
-     if (len(full_month) == 3):
-          index = str(int(days[1].index(full_month)) + 1)
-
-          if (len(index) == 1):
-               index = "0" + index
-          date = date.replace(full_month, "%s" %index)
-          date = "".join(date.split()[::-1])
 
           return date
 
@@ -424,7 +429,6 @@ def exclude_range(day, last_day, month, EXCLUDE ,year):
 def main():
      get_term()
 main()
-
 
 json_dictionary = json.dumps(dictionary)
 print(json_dictionary)
