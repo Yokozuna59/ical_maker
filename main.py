@@ -408,20 +408,20 @@ def exclude_range(day, last_day, month, EXCLUDE ,year):
 
 def two_months(date, EXCLUDE):
      year = date[0:4]
-     dates = date[4:].split(" - ")
+     dates = date[4:].split(" - ")[::-1]
 
      for i in (0,1):
           month_element = dates[i]
 
           if (i == 0):
-               day = int(month_element[0:2])
-               month = month_element[2::]
+               day = int(month_element[2::])
+               month = month_element[0:2]
                index = int(month) - 1
                last_day = int(days[2][index]) + 1
           else:
                day = 1
                month = month_element[0:2]
-               last_day = int(month_element[0:2]) + 1
+               last_day = int(month_element[2::]) + 1
 
           for j in range(day, last_day):
                j = str(j)
