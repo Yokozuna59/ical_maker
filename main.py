@@ -279,7 +279,6 @@ def check_event(date, event, START, EXCLUDE, END, NORMAL):
           elif (event.find("last day of classes") != -1):
                END.append(date)
                if (event.find("normal") != -1):
-                    EXCLUDE.append(date)
                     normal_result = normal(date, event)
                     NORMAL.append(normal_result)
           elif (event.find("resume") != -1):
