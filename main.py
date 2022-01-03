@@ -13,6 +13,7 @@ def get_arguments():
 
           for argv in argvs:
                argv_list.append(argv)
+
           argvs.sort(reverse=True)
      else:
           argv_list = None
@@ -42,7 +43,6 @@ def get_past():
 
 def get_term():
      years = get_arguments()
-
      current = get_current()
      past = get_past()
 
@@ -62,7 +62,7 @@ def get_term():
                          get_tables(url, payload, value)
                     else:
                          for year in years:
-                              if (value[0:4] == (year)):
+                              if (value[0:4] == year):
                                    get_tables(url, payload, value)
 
 
@@ -82,11 +82,12 @@ def get_tables(url, payload, value):
 
      html = (requests.post(url, data=payload)).content
      soup = BeautifulSoup(html, 'html.parser')
-     tables = soup.find_all(class_ = "table-responsive")
-     get_dates_events(tables, term)
+     tables = soup.find_all(class_ = "table")
+
+     get_dates_events(term, tables)
 
 
-def get_dates_events(tables, term):
+def get_dates_events(term, tables):
      first_line = False
 
      START = []
@@ -94,25 +95,19 @@ def get_dates_events(tables, term):
      EXCLUDE = []
      NORMAL = []
 
-     soup = BeautifulSoup(str(tables[0]), 'html.parser')
-     href_pdf = soup.find("a").get("href")
-
-     if (href_pdf.find("PREP") != -1):
-          academic = "PREP"
-     else:
+     if (len(tables) == 1):
           academic = "ACAD"
+     elif (len(tables) == 2):
+          academic = "PREP"
 
      for table in tables:
           soup = BeautifulSoup(str(table), 'html.parser')
 
           path = dictionary[term][academic]
 
-          table_index = tables.index(table)
-
-          if ((academic == "ACAD") and (table_index == 1)):
-               continue
-          elif ((academic == "PREP")):
-               half = get_halfs(table_index)
+          if ((academic == "PREP")):
+               table_index = tables.index(table)
+               half = get_half(table_index)
                path = path[half]
 
           columns = soup.find_all("tr")[1::]
@@ -131,12 +126,12 @@ def get_dates_events(tables, term):
                event = (" ".join((rows[row + 1].text).split())).lower()
 
                if (first_line == False):
-                    first_element = do_first_line(date)
-                    year = first_element[0]
-                    next_year = first_element[1]
+                    years = get_years(date)
+                    year = years[0]
+                    next_year = years[1]
 
                     first_line = True
-               elif (date.find(next_year) != -1):
+               elif (date[-2:].find(next_year[-2:]) != -1):
                     year = next_year
 
                if ((date.find("DEC") != -1) and (date.find("JAN") != -1)):
@@ -144,7 +139,7 @@ def get_dates_events(tables, term):
                elif (date.find(year) != -1):
                     date = one_year(date, year)
                else:
-                    date = not_1_year_nor_2_year(date, year)
+                    date = not_one_year_nor_two_years(date, year)
 
                if (len(date) == 10):
                     date = "0" + date
@@ -161,7 +156,7 @@ def get_dates_events(tables, term):
           NORMAL = []
 
 
-def get_halfs(table_index):
+def get_half(table_index):
      halfs = ["FIRST", "SECOND"]
      half = halfs[table_index]
 
@@ -178,13 +173,8 @@ def replacement(date):
      return date
 
 
-def do_first_line(date):
-     date_spliited = date.replace("'", " ").replace("-", " ").split()
-     year = date_spliited[-1]
-
-     if (len(year) == 2):
-          year = "20" + year
-
+def get_years(date):
+     year = date[-4:]
      next_year = str(int(year) + 1)
 
      return year, next_year
@@ -217,6 +207,7 @@ def two_years(date, year):
 
 def one_year(date, year):
      dates = []
+
      date = " ".join(date.replace("%s" %year, "").split())
 
      if (date[-1].find("-") != -1):
@@ -238,8 +229,9 @@ def one_year(date, year):
      return date
 
 
-def not_1_year_nor_2_year(date, year):
+def not_one_year_nor_two_years(date, year):
      dates = []
+
      date_spliited = " ".join(date.replace("-", " - ").split()).split(" - ")
 
      if (len(date_spliited) != 1):
@@ -278,6 +270,7 @@ def check_event(date, event, START, EXCLUDE, END, NORMAL):
                START.append(date)
           elif (event.find("last day of classes") != -1):
                END.append(date)
+
                if (event.find("normal") != -1):
                     normal_result = normal(date, event)
                     NORMAL.append(normal_result)
@@ -433,5 +426,4 @@ def main():
      get_term()
 main()
 
-json_dictionary = json.dumps(dictionary)
-print(json_dictionary)
+print(json.dumps(dictionary))
