@@ -1,35 +1,37 @@
 # iCal Maker
 
-A simple python project gets `included and exclude` Dates needed from [KFUPM Registrar](https://registrar.kfupm.edu.sa/).
+> A python web scraping project gets specific dates from [KFUPM Registrar](https://registrar.kfupm.edu.sa/).
+
+[![lincese](https://img.shields.io/badge/license-MIT-yellow)](https://opensource.org/licenses/MIT)
 
 ## Installation
 
 1. First clone the repo:
 
-```
-git clone https://github.com/Yokozuna59/ical_maker.git
-```
+     ```bash
+     git clone https://github.com/Yokozuna59/ical_maker.git
+     ```
 
 2. Create a vartual environment:
 
-```
-python3 -m venv enviromentName
-```
+     ```bash
+     python3 -m venv enviromentName
+     ```
 
 3. Activate the virtual environment:
 
-```
-source enviromentName/bin/activate
-```
+     ```bash
+     source enviromentName/bin/activate
+     ```
 
 4. install the requirements:
 
-```
-pip install -r requirements.txt
-```
+     ```bash
+     pip install -r requirements.txt
+     ```
 
-5. Run the app:
+5. Run the project:
 
-```
-python3 main.py
-```
+     ```bash
+     python3 main.py
+     ```
