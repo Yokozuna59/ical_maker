@@ -2,6 +2,7 @@
 
 > A python web scraping project gets specific dates from [KFUPM Registrar](https://registrar.kfupm.edu.sa/).
 
+[![python-version](https://img.shields.io/badge/pyhton-v3.8-blue)](https://www.python.org/downloads/)
 [![license](https://img.shields.io/badge/license-MIT-yellow)](https://opensource.org/licenses/MIT)
 
 ## Installation
