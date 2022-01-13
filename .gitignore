@@ -1,4 +1,7 @@
 /main/
+/payload/
+
 *.py
 !main.py
+
 *.ics
