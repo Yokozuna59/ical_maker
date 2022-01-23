@@ -9,7 +9,7 @@ Cython==0.29.26
 dl==0.1.0
 html5lib==1.0.1
 ipaddr==2.2.0
-ipython==7.30.1
+ipython==7.31.1
 jedi==0.18.1
 keyring==18.0.1
 lxml>=4.6.5
