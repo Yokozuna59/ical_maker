@@ -1,11 +1,20 @@
+# Folders
+# remove venv folder
 /main
-/payload
+# remove KFUPM_Course Offeing folder
+/KFUPM _ Course Offering_files
 
+
+# Files extentions
+# remove all other python filess
 *.py
+# remove all ics files
+*.ics
+# remove all HTML files
+*.html
+
+
+# unremoved files
+# unremove there python files
 !main.py
 !calendars.py
-
-*.ics
-
-*.html
-/KFUPM _ Course Offering_files
