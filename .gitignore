@@ -1,4 +1,11 @@
-/main/
+/main
+/payload
+
 *.py
 !main.py
+!calendars.py
+
 *.ics
+
+*.html
+/KFUPM _ Course Offering_files

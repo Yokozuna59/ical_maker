@@ -1,6 +1,5 @@
 import sys
 import requests
-import ast
 from bs4 import BeautifulSoup
 import json
 
@@ -22,33 +21,59 @@ def get_arguments():
 
 
 def get_current():
-     url = ("https://registrar.kfupm.edu.sa/CurrentAcadYear")
+     url = ("https://registrar.kfupm.edu.sa/academic-calendar/current-academic-year/")
 
-     acad = ast.literal_eval(open("payloads/current/acad.json").read())
-     prep = ast.literal_eval(open("payloads/current/prep.json").read())
-     payloads = [acad, prep]
+     return url
 
-     return url, payloads
+
+def get_future():
+     url = ("https://registrar.kfupm.edu.sa/academic-calendar/future-academic-years/")
+
+     return url
 
 
 def get_past():
-     url = ("https://registrar.kfupm.edu.sa/PastAcadYear")
+     url = ("https://registrar.kfupm.edu.sa/academic-calendar/past-academic-years/")
 
-     acad = ast.literal_eval(open("payloads/past/acad.json").read())
-     prep = ast.literal_eval(open("payloads/past/prep.json").read())
-     payloads = [acad, prep]
-
-     return url, payloads
+     return url
 
 
 def get_term():
      years = get_arguments()
+
      current = get_current()
+     future = get_future()
      past = get_past()
 
-     for i in (current, past):
-          url = i[0]
-          payloads = i[1]
+     for i in (current, future, past):
+          html = (requests.get(i)).text
+          soup = BeautifulSoup(html, 'html.parser')
+
+          acap_options = soup.find(id="academic_calendar_option")
+          prep_options = soup.find(id="academic_calendar_prep_year_option")
+
+          for j in (0,1):
+               if (j == 0):
+                    url = ["academic-calendar"]
+               else:
+                    url = ["academic-prep-calendar-first-half", "academic-prep-calendar-second-half"]
+
+               options = j.find_all('option')[1::]
+
+               if (len(options) == 0):
+                    continue
+
+               for option in options:
+                    value = option["value"]
+
+                    if (years == None):
+                         get_api(url, value)
+                    else:
+                         for year in years:
+                              if (value[0:4] == year):
+                                   get_api(url, value)
+
+          continue
 
           for payload in payloads:
                html = (requests.post(url, data=payload)).content
@@ -64,6 +89,12 @@ def get_term():
                          for year in years:
                               if (value[0:4] == year):
                                    get_tables(url, payload, value)
+
+
+def get_api(url, value):
+     url = (f"https://registrar.kfupm.edu.sa/api/{url}?term_code={value}")
+     response = requests.get(url.json)
+     print(response)
 
 
 def get_tables(url, payload, value):
@@ -427,3 +458,353 @@ def main():
 main()
 
 print(json.dumps(dictionary))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import sys
+import requests
+from bs4 import BeautifulSoup
+import json
+
+
+def dictionary_func(dictionary={}):
+
+     return dictionary
+
+
+def get_arguments():
+     if (len(sys.argv) != 1):
+          argv_list = []
+          argvs = sys.argv[1::]
+
+          for argv in argvs:
+               argv_list.append(argv)
+
+          argvs.sort(reverse=True)
+     else:
+          argv_list = None
+
+     return argv_list
+
+
+def get_current_url():
+     url = ("https://registrar.kfupm.edu.sa/academic-calendar/current-academic-year/")
+
+     return url
+
+
+def get_future_url():
+     url = ("https://registrar.kfupm.edu.sa/academic-calendar/future-academic-years/")
+
+     return url
+
+
+def get_past_url():
+     url = ("https://registrar.kfupm.edu.sa/academic-calendar/past-academic-years/")
+
+     return url
+
+
+def get_terms():
+     current_url = get_current_url()
+     future_url = get_future_url()
+     past_url = get_past_url()
+
+     for url in (future_url, current_url, past_url):
+          html = requests.get(url).content
+          soup = BeautifulSoup(html, 'html.parser')
+
+          options = soup.find_all('option')
+          if (len(options) == 2):
+               continue
+
+          get_options(soup)
+
+
+def get_ids():
+     ids = ["academic_calendar_option", "academic_calendar_prep_year_option"]
+
+     return ids
+
+
+def get_options(soup):
+     ids = get_ids()
+
+     for id in ids:
+          id_index = ids.index(id)
+          acad = soup.find(id=id)
+          options = acad.find_all('option')[1::]
+
+          get_values(options, id_index)
+
+
+def get_api_paths():
+     api_paths = [["academic-calendar"], ["academic-prep-calendar-first-half", "academic-prep-calendar-second-half"]]
+
+     return api_paths
+
+
+def get_values(options, id_index):
+     years = get_arguments()
+     api_paths = get_api_paths()
+     api_path_index = api_paths.index(api_paths[id_index])
+
+     for api_path in api_paths[id_index]:
+          path_index = api_paths[id_index].index(api_path)
+
+          for option in options:
+               value = option["value"]
+
+               if (years == None):
+                    term = get_dictionary(value)
+                    path = dictionary_path(term, api_path_index, path_index)
+                    get_response(api_path, value, path)
+               else:
+                    for year in years:
+                         if (value[0:4] == year):
+                              term = get_dictionary(value)
+                              path = dictionary_path(term, api_path_index, path_index)
+                              get_response(api_path, value, path)
+
+
+def get_dictionary(value):
+     dictionary = dictionary_func()
+
+     term = value[2:5]
+     keys = " ".join(list(dictionary.keys()))
+
+     if (keys.find(term) != -1):
+          dictionary[term]["prep"] = {"first_half":{},"second_half":{}}
+     else:
+          dictionary[term] = {}
+          dictionary[term]["acad"] = {}
+
+     dictionary_func(dictionary)
+
+     return term
+
+
+def dictionary_path(term, api_path_index, path_index):
+     dictionary = dictionary_func()
+
+     if (api_path_index == 0):
+          path = dictionary[term]["acad"]
+     else:
+          if (path_index == 0):
+               half = "first_half"
+          else:
+               half = "second_half"
+          path = dictionary[term][half]
+
+     return path
+
+def get_response(api_path, value, path):
+     url = (f"https://registrar.kfupm.edu.sa/api/{api_path}?term_code={value}")
+     response = requests.get(url).content
+     response_json = json.loads(response)
+
+     get_events(response_json, path)
+
+
+def get_events(response_json, path):
+     events_list = response_json["events"]
+
+     for event in events_list:
+          check_event(event, path)
+
+
+def check_event(event, path):
+     exclude_list = []
+     normal_list = []
+
+     event_label = (event["event"]).lower()
+     start_date = event["start_date"]
+     end_date = event["end_date"]
+
+     start_date = get_date(start_date)
+     if (end_date != None):
+          end_date = get_date(end_date)
+
+
+     if (event_label.find("exams preparation break") != -1):
+          return
+     elif (event_label.find("classes begin") != -1):
+          start = start_date
+          path["start"] = start
+     elif (event_label.find("last day of classes") != -1):
+          end = start_date
+          path["end"] = end
+
+          if (event_label.find("normal") != -1):
+               normal_result = normal(start_date, event_label)
+               normal_list.append(normal_result)
+     elif (event_label.find("last day before") != -1):
+          before_result = before(start_date)
+          exclude_list.append(before_result)
+     elif (event_label.find("nomral") != -1):
+          normal_result = normal(start_date, event)
+          normal_list.append(normal_result)
+     elif (event_label.find("resume") != -1):
+          resume(start_date, exclude_list)
+     elif ((event_label.find("holiday") != -1) or (event_label.find("break") != -1) or (event_label.find("vacation") != -1)):
+          exclude_list.append(start_date)
+          if (end_date != None):
+               print(end_date)
+     else:
+          return
+
+     path["exclude"] = exclude_list
+     path["normal"] = normal_list
+
+     exclude_list = []
+     normal_list = []
+
+
+def months_func():
+     months = ["Jan", "Fab", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+     month_days = ["31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"]
+
+     return months, month_days
+
+
+def get_date(date):
+     months = months_func()
+     month_names_list = months[0]
+
+     month = date[0:3]
+     index = month_names_list.index(month)
+     str_index = str(index + 1)
+
+     if (index < 10):
+          month_index = f"0{str_index}"
+
+     date = date.replace(month_names_list[index], month_index).replace(".", "")
+     date = "".join((date).split(", ")[::-1])
+
+     return date
+
+
+def range():
+     pass
+
+
+def week_days():
+     week = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+
+     return week
+
+
+def normal(date, event):
+     week = week_days()
+
+     for day in week:
+          if (event.find(day) != -1):
+               day = day.lower()
+               normal_day = (f"{date}:{day}")
+
+               return normal_day
+
+
+def resume(date, exclude_list):
+     exclude_date = exclude_list[-1]
+
+     if (exclude_date[4:6] == date[4:6]):
+          date = date[0:6]
+          day = int(exclude_date[6::]) + 1
+          last_day = int(resume_date[6::])
+
+          for i in range(day, last_day):
+               i = str(i)
+
+               if (len(i) == 1):
+                    i = "0" + i
+               exclude_list.append(date + i)
+     else:
+          year = date.replace(" ", "")[0:4]
+
+          for i in (0,1):
+               if (i == 0):
+                    day = int(exclude_date[-2:]) + 1
+                    month = exclude_date[4:6]
+                    index = int(month) - 1
+                    last_day = int(days[2][index]) + 1
+               else:
+                    day = 1
+                    month = resume_date[4:6]
+                    last_day = int(resume_date[-2:])
+
+               for j in range(day, last_day):
+                    j = str(j)
+                    if (len(j) == 1):
+                         j = "0" + j
+                    exclude_list.append(year + month + j)
+
+     return exclude_list
+
+
+def before(date):
+     months = months_func()
+     month_days = months[1]
+
+     month = int(date[4:6])
+
+     days = int(month_days[int(month) - 1])
+     date = int(date) + 1
+     day = date%100
+
+     if (days < day):
+          date = date + 1 - day
+          date += 100
+
+     date = str(date)
+
+     return date
+
+
+def exclude():
+     pass
+
+
+def main():
+     get_terms()
+main()
+
+
+print(dictionary_func())
